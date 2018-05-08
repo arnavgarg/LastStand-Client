@@ -1,6 +1,7 @@
 package State;
 
 public class StateLoader {
+
     public State currentState;
 
     public StateLoader(State s){
@@ -14,7 +15,9 @@ public class StateLoader {
     public void render(){
         currentState.render();
     }
+
     public void tick(){
         currentState.tick();
     }
+
 }
