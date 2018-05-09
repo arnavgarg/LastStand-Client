@@ -1,0 +1,35 @@
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+
+public class Avatar {
+	
+	BufferedImage bodyImage;
+	BufferedImage handImage;
+	private int x = 412;
+	private int y = 287;
+	
+	public Avatar() {
+		
+		try {
+			bodyImage = ImageIO.read(getClass().getResource("/res/yellowcircle.png"));
+			handImage = ImageIO.read(getClass().getResource("/res/yellowcircle.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		bodyImage = (BufferedImage) bodyImage.getScaledInstance(175, 175, Image.SCALE_DEFAULT);
+		handImage = (BufferedImage) handImage.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+		
+	}
+	
+	public void paintComponent(Graphics g) {
+		g.drawImage(bodyImage, x, y, null);
+	}
+	
+}
