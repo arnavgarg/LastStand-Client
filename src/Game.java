@@ -1,19 +1,27 @@
-import State.StateLoader;
+import game.state.MainMenu;
+import game.state.StateLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Game extends JPanel{
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     private boolean running;
-    private State.StateLoader loader;
+    private StateLoader loader;
+    private MouseEvent me;
 
     private void start(){
-        loader = new State.StateLoader(new State.MainMenu());
+        loader = new StateLoader(new MainMenu());
         running = true;
         run();
+    }
+
+    public void updateMouse(){
+        GameInfo.getInstance().setMouseX(me.getX());
+        GameInfo.getInstance().setMouseY(me.getY());
     }
 
     public void run(){
@@ -34,6 +42,7 @@ public class Game extends JPanel{
                 ticks++;
                 delta--;
             }
+            updateMouse();
             loader.render();
             frames++;
 
@@ -50,6 +59,7 @@ public class Game extends JPanel{
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);

@@ -1,4 +1,4 @@
-package State;
+package game.state;
 
 public class MainMenu extends State{
     public void render(){
