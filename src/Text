@@ -1,0 +1,53 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class Text {
+
+	private BufferedImage image;
+	
+	public Text(){
+		try {
+			image = ImageIO.read(getClass().getResource("background.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private Font titleFont = new Font("Serif", Font.BOLD, 100);
+	private Font font = new Font("Serif", Font.BOLD, 50);
+	
+	
+	private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
+    }
+	
+	public void render(Graphics g){
+		BufferedImage resized = resize(image, 750, 1230);
+		g.drawImage(resized, 0, 0, null);
+		g.setFont(titleFont);
+		g.setColor(Color.WHITE);
+		g.drawString("LAST STAND", 150, 200);
+		g.drawRect(150, 115, 730, 100);
+		g.setColor(Color.BLACK);
+		g.fillRect(400, 350, 200, 100);
+		g.setColor(Color.WHITE);
+		g.setFont(font);
+    	g.drawString("PLAY", 425, 420);
+    	//g.drawString("", 100, 420);
+    	
+  
+
+	}
+}
