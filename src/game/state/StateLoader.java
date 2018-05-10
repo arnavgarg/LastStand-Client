@@ -1,4 +1,4 @@
-package State;
+package game.state;
 
 public class StateLoader {
 
