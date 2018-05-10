@@ -68,4 +68,5 @@ public class Game extends JPanel{
         frame.setVisible(true);
         game.start();
     }
+  
 }
