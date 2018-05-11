@@ -1,13 +1,14 @@
 package game.main;
 
+import java.awt.*;
+
 public class GameInfo {
     //keeps track of mouse info
     private GameInfo(){
     }
 
     private static GameInfo instance = null;
-    private int mouseX;
-    private int mouseY;
+    private Point point;
 
     public static GameInfo getInstance(){
         if(instance == null){
@@ -16,17 +17,14 @@ public class GameInfo {
         return instance;
     }
 
-    public void setMouseX(int dx){
-        this.mouseX = dx;
-    }
-    public void setMouseY(int dy){
-        this.mouseY = dy;
+    public void setMouseP(Point p){
+        this.point = p;
     }
 
     public int getMouseX(){
-        return mouseX;
+        return (int)point.getX();
     }
     public int getMouseY(){
-        return mouseY;
+        return (int)point.getY();
     }
 }
