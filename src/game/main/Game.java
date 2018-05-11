@@ -1,3 +1,5 @@
+package game.main;
+
 import game.state.MainMenu;
 import game.state.StateLoader;
 

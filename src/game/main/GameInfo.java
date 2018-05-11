@@ -1,11 +1,13 @@
+package game.main;
+
 public class GameInfo {
     //keeps track of mouse info
     private GameInfo(){
     }
 
     private static GameInfo instance = null;
-    public int mouseX;
-    public int mouseY;
+    private int mouseX;
+    private int mouseY;
 
     public static GameInfo getInstance(){
         if(instance == null){

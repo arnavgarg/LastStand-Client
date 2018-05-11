@@ -2,7 +2,7 @@ package game.state;
 
 public class StateLoader {
 
-    public State currentState;
+    private State currentState;
 
     public StateLoader(State s){
         currentState = s;
