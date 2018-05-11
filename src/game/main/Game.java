@@ -13,7 +13,7 @@ public class Game extends JPanel{
     public static final int HEIGHT = 600;
     private boolean running;
     private StateLoader loader;
-    private MouseEvent me;
+    private MouseInfo mi;
 
     private void start(){
         loader = new StateLoader(new MainMenu());
@@ -22,8 +22,7 @@ public class Game extends JPanel{
     }
 
     public void updateMouse(){
-        GameInfo.getInstance().setMouseX(me.getX());
-        GameInfo.getInstance().setMouseY(me.getY());
+        GameInfo.getInstance().setMouseP(MouseInfo.getPointerInfo().getLocation());
     }
 
     public void run(){
