@@ -1,6 +1,6 @@
-package State;
+package game.state;
 
-public class Connect extends State{
+public class Help extends State{
     public void render(){
 
     }
