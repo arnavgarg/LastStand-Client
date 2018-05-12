@@ -1,5 +1,7 @@
 package game.state;
 
+import java.awt.*;
+
 public class StateLoader {
 
     private State currentState;
@@ -12,8 +14,8 @@ public class StateLoader {
         currentState = s;
     }
 
-    public void render(){
-        currentState.render();
+    public void render(Graphics g){
+        currentState.render(g);
     }
 
     public void tick(){
