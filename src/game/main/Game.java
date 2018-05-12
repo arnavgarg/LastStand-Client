@@ -6,23 +6,31 @@ import game.state.StateLoader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferStrategy;
 
-public class Game extends JPanel{
+public class Game extends Canvas{
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     private boolean running;
     private StateLoader loader;
-    private MouseInfo mi;
 
     private void start(){
         loader = new StateLoader(new MainMenu());
+        this.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                GameInfo.getInstance().setMouseP(e.getPoint());
+            }
+        });
         running = true;
         run();
-    }
-
-    public void updateMouse(){
-        GameInfo.getInstance().setMouseP(MouseInfo.getPointerInfo().getLocation());
     }
 
     public void run(){
@@ -43,8 +51,7 @@ public class Game extends JPanel{
                 ticks++;
                 delta--;
             }
-            updateMouse();
-            loader.render();
+            render();
             frames++;
 
             if (System.currentTimeMillis() - timer > 1000) {
@@ -54,6 +61,20 @@ public class Game extends JPanel{
                 frames = 0;
             }
         }
+    }
+
+    private void render() {
+        BufferStrategy bs = getBufferStrategy();
+        if(bs == null) {
+            createBufferStrategy(3);
+            return;
+        }
+        Graphics g = bs.getDrawGraphics();
+
+        loader.render(g);
+
+        g.dispose();
+        bs.show();
     }
 
     public static void main(String[] args){
