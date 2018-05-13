@@ -22,9 +22,17 @@ public class GameInfo {
     }
 
     public int getMouseX(){
+        if(point == null) {
+            point = new Point(0,0);
+        }
+
         return (int)point.getX();
     }
     public int getMouseY(){
+        if(point == null) {
+            point = new Point(0,0);
+        }
+
         return (int)point.getY();
     }
 }

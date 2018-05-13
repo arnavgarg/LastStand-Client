@@ -65,7 +65,7 @@ public class Game extends Canvas{
         loader.load(s);
     }
 
-    public void run(){
+    private void run(){
         long lastTime = System.nanoTime();
         final double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -103,6 +103,7 @@ public class Game extends Canvas{
         }
         Graphics g = bs.getDrawGraphics();
 
+        g.clearRect(0, 0, WIDTH, HEIGHT);
         loader.render(g);
 
         g.dispose();
