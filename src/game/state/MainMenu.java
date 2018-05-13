@@ -1,6 +1,7 @@
 package game.state;
 
 import game.main.Game;
+import game.main.GameInfo;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -35,10 +36,28 @@ public class MainMenu extends State{
     }
 
     public void tick(){
-        //TODO - if the mouse is in bounding boxes, highlight buttons
+        int x = GameInfo.getInstance().getMouseX();
+        int y = GameInfo.getInstance().getMouseY();
+
+        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 75 && y <= Game.HEIGHT/2 + 125){
+            hJoin = true;
+        }else {
+            hJoin = false;
+        }
+
+        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 150 && y <= Game.HEIGHT/2 + 200){
+            hHelp = true;
+        }else {
+            hHelp = false;
+        }
     }
 
     public void processMouseEvent(MouseEvent me) {
-
+        if(hJoin){
+            Game.loadState(new game.state.Connect());
+        }
+        if(hHelp){
+            Game.loadState(new game.state.Help());
+        }
     }
 }

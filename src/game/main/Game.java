@@ -1,11 +1,13 @@
 package game.main;
 
 import game.state.MainMenu;
+import game.state.State;
 import game.state.StateLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 
@@ -14,7 +16,7 @@ public class Game extends Canvas{
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     private boolean running;
-    private StateLoader loader;
+    private static StateLoader loader;
 
     private void start(){
         loader = new StateLoader(new MainMenu());
@@ -29,8 +31,38 @@ public class Game extends Canvas{
                 GameInfo.getInstance().setMouseP(e.getPoint());
             }
         });
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loader.processMouseEvent(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         running = true;
         run();
+    }
+
+    public static void loadState(State s){
+        loader.load(s);
     }
 
     public void run(){

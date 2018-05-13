@@ -1,6 +1,7 @@
 package game.state;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class StateLoader {
 
@@ -22,4 +23,7 @@ public class StateLoader {
         currentState.tick();
     }
 
+    public void processMouseEvent(MouseEvent me){
+        currentState.processMouseEvent(me);
+    }
 }
