@@ -8,7 +8,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class MainMenu extends State{
+public class MenuState extends State {
+
     private boolean hJoin = false;
     private boolean hHelp = false;
     private Image start;
@@ -17,7 +18,7 @@ public class MainMenu extends State{
     public void render(Graphics g){
         if(start==null) {
             try {
-                start = ImageIO.read(getClass().getResource("/start.png"));
+                start = ImageIO.read(getClass().getResource("start.png"));
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -54,10 +55,11 @@ public class MainMenu extends State{
 
     public void processMouseEvent(MouseEvent me) {
         if(hJoin){
-            Game.loadState(new game.state.Connect());
+            Game.loadState(new ConnectState());
         }
         if(hHelp){
-            Game.loadState(new game.state.Help());
+            Game.loadState(new HelpState());
         }
     }
+
 }

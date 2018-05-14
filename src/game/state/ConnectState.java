@@ -3,7 +3,8 @@ package game.state;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Connect extends State{
+public class ConnectState extends State{
+
     public void render(Graphics g){
         //TODO - Loading screen
     }
@@ -15,4 +16,5 @@ public class Connect extends State{
     public void processMouseEvent(MouseEvent me){
 
     }
+
 }

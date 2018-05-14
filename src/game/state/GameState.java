@@ -3,16 +3,18 @@ package game.state;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Help extends State{
+public class GameState extends State{
+
     public void render(Graphics g){
-        //TODO - render text or a scroll screen
+        //TODO - Render the game map
     }
 
     public void tick(){
-        //TODO - check the mouse locations in order to highlight
+        //TODO - update the information of mouse in the class
     }
 
     public void processMouseEvent(MouseEvent me) {
 
     }
+
 }

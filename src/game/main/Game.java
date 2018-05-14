@@ -1,6 +1,6 @@
 package game.main;
 
-import game.state.MainMenu;
+import game.state.MenuState;
 import game.state.State;
 import game.state.StateLoader;
 
@@ -19,12 +19,10 @@ public class Game extends Canvas{
     private static StateLoader loader;
 
     private void start(){
-        loader = new StateLoader(new MainMenu());
+        loader = new StateLoader(new MenuState());
         this.addMouseMotionListener(new MouseMotionListener() {
             @Override
-            public void mouseDragged(MouseEvent e) {
-
-            }
+            public void mouseDragged(MouseEvent e) {}
 
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -38,24 +36,16 @@ public class Game extends Canvas{
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
         running = true;
         run();
