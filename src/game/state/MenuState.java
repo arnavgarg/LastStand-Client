@@ -12,28 +12,29 @@ public class MenuState extends State {
 
     private boolean hJoin = false;
     private boolean hHelp = false;
-    private Image start;
+    private Image join;
     private Image help;
+    
+    public MenuState() {
+        try {
+            join = ImageIO.read(getClass().getResource("/res/joinbutton.png"));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+        try {
+            help = ImageIO.read(getClass().getResource("/res/helpbutton.png"));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+        Image join = join.getScaledInstance(160, 55, Image.SCALE_DEFAULT);
+        Image help = help.getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+    }
 
     public void render(Graphics g){
-        if(start==null) {
-            try {
-                start = ImageIO.read(getClass().getResource("start.png"));
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        if(help == null) {
-            try {
-                help = ImageIO.read(getClass().getResource("/help.png"));
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        g.drawImage(start, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
-        g.drawImage(help, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50, null);
+        g.drawImage(join, Game.WIDTH/2 - 80, Game.HEIGHT/2 - 55, null);
+        g.drawImage(help, Game.WIDTH/2 - 23, Game.HEIGHT/2 + 55, null);
     }
 
     public void tick(){
