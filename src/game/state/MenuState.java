@@ -18,7 +18,7 @@ public class MenuState extends State {
     public void render(Graphics g){
         if(start==null) {
             try {
-                start = ImageIO.read(getClass().getResource("start.png"));
+                start = ImageIO.read(getClass().getResource("/start.png"));
             }catch (IOException e){
                 e.printStackTrace();
             }
