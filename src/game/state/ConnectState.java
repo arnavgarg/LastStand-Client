@@ -5,7 +5,8 @@ import game.main.GameInfo;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Connect extends State{
+public class ConnectState extends State{
+
     public void render(Graphics g){
 
     }
@@ -20,4 +21,5 @@ public class Connect extends State{
     public void processMouseEvent(MouseEvent me){
 
     }
+
 }

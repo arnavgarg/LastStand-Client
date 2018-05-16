@@ -1,4 +1,4 @@
-package game.map;
+package game.sprites;
 
 public class Rock {
 }

@@ -3,12 +3,12 @@ package game.main;
 import java.awt.*;
 
 public class GameInfo {
+
     //keeps track of mouse info
-    private GameInfo(){
-    }
+    private GameInfo() {}
 
     private static GameInfo instance = null;
-    private Point point;
+    private Point mouseLoc;
 
     public static GameInfo getInstance(){
         if(instance == null){
@@ -17,22 +17,16 @@ public class GameInfo {
         return instance;
     }
 
-    public void setMouseP(Point p){
-        this.point = p;
+    public void setMouseP(Point loc){
+        mouseLoc = loc;
     }
 
     public int getMouseX(){
-        if(point == null) {
-            point = new Point(0,0);
-        }
-
-        return (int)point.getX();
+        return (int)mouseLoc.getX();
     }
+
     public int getMouseY(){
-        if(point == null) {
-            point = new Point(0,0);
-        }
-
-        return (int)point.getY();
+        return (int)mouseLoc.getY();
     }
+
 }
