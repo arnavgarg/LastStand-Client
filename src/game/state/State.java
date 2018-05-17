@@ -10,5 +10,7 @@ public abstract class State {
     public abstract void tick();
 
     public abstract void processMouseEvent(MouseEvent me);
+    
+    public abstract void processKeyEvent(KeyEvent ke);
 
 }
