@@ -16,5 +16,7 @@ public class HelpState extends State{
     public void processMouseEvent(MouseEvent me) {
 
     }
+    
+    public void processKeyEvent(KeyEvent ke) {}
 
 }
