@@ -2,6 +2,7 @@ package game.state;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.awt.Image;
 import java.io.IOException;
 
@@ -49,4 +50,8 @@ public class GameState extends State {
 
     }
 
+    public void processKeyEvent(KeyEvent ke) {
+
+    }
+	
 }
