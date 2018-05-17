@@ -10,6 +10,8 @@ public class GameInfo {
     private static GameInfo instance = null;
     private Point mouseLoc;
 
+    private String playerName;
+
     public static GameInfo getInstance(){
         if(instance == null){
             instance = new GameInfo();
@@ -19,6 +21,9 @@ public class GameInfo {
 
     public void setMouseP(Point loc){
         mouseLoc = loc;
+    }
+    public void setPlayerName(String name) {
+        playerName = name;
     }
 
     public int getMouseX(){
