@@ -2,7 +2,7 @@ package game.main;
 
 import game.state.MenuState;
 import game.state.State;
-import game.state.StateLoader
+import game.state.StateLoader;
 
 import javax.swing.*;
 import java.awt.*;
