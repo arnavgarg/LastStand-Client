@@ -3,6 +3,7 @@ package game.state;
 import game.main.GameInfo;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class ConnectState extends State{
@@ -22,4 +23,7 @@ public class ConnectState extends State{
 
     }
 
+    public void processKeyEvent(KeyEvent ke) {
+
+    }
 }

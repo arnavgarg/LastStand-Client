@@ -1,6 +1,7 @@
 package game.state;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class HelpState extends State{
@@ -17,4 +18,7 @@ public class HelpState extends State{
 
     }
 
+    public void processKeyEvent(KeyEvent ke) {
+
+    }
 }

@@ -1,6 +1,7 @@
 package game.state;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class StateLoader {
@@ -23,8 +24,11 @@ public class StateLoader {
         currentState.tick();
     }
 
-    public void processMouseEvent(MouseEvent me){
+    public void processMouseEvent(MouseEvent me) {
         currentState.processMouseEvent(me);
     }
 
+    public void processKeyEvent(KeyEvent ke) {
+        currentState.processKeyEvent(ke);
+    }
 }

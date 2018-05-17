@@ -5,6 +5,7 @@ import game.main.GameInfo;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -62,4 +63,5 @@ public class MenuState extends State {
         }
     }
 
+    public void processKeyEvent(KeyEvent ke) {}
 }

@@ -6,9 +6,7 @@ import game.state.StateLoader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas{
@@ -46,6 +44,22 @@ public class Game extends Canvas{
 
             @Override
             public void mouseExited(MouseEvent e) {}
+        });
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
         });
         running = true;
         run();
