@@ -28,7 +28,10 @@ public class StateLoader {
         currentState.processMouseEvent(me);
     }
 
-    public void processKeyEvent(KeyEvent ke) {
-        currentState.processKeyEvent(ke);
+    public void processKeyEventPress(KeyEvent ke) {
+        currentState.processKeyEventPress(ke);
+    }
+    public void processKeyEventRelease(KeyEvent ke) {
+        currentState.processKeyEventRelease(ke);
     }
 }

@@ -53,12 +53,12 @@ public class Game extends Canvas{
 
             @Override
             public void keyPressed(KeyEvent e) {
-
+                loader.processKeyEventPress(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-
+                loader.processKeyEventRelease(e);
             }
         });
         running = true;
@@ -118,7 +118,6 @@ public class Game extends Canvas{
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);

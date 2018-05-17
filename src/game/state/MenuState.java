@@ -63,5 +63,11 @@ public class MenuState extends State {
         }
     }
 
-    public void processKeyEvent(KeyEvent ke) {}
+    public void processKeyEventPress(KeyEvent ke) {
+        System.out.println(KeyEvent.KEY_PRESSED);
+    }
+
+    public void processKeyEventRelease(KeyEvent ke) {
+
+    }
 }
