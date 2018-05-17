@@ -41,17 +41,8 @@ public class MenuState extends State {
         int x = GameInfo.getInstance().getMouseX();
         int y = GameInfo.getInstance().getMouseY();
 
-        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 75 && y <= Game.HEIGHT/2 + 125){
-            hJoin = true;
-        }else {
-            hJoin = false;
-        }
-
-        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 150 && y <= Game.HEIGHT/2 + 200){
-            hHelp = true;
-        }else {
-            hHelp = false;
-        }
+        hJoin = x >= Game.WIDTH / 2 - 75 && x <= Game.WIDTH / 2 + 75 && y >= Game.HEIGHT / 2 + 75 && y <= Game.HEIGHT / 2 + 125;
+        hHelp = x >= Game.WIDTH / 2 - 75 && x <= Game.WIDTH / 2 + 75 && y >= Game.HEIGHT / 2 + 150 && y <= Game.HEIGHT / 2 + 200;
     }
 
     public void processMouseEvent(MouseEvent me) {
@@ -64,7 +55,7 @@ public class MenuState extends State {
     }
 
     public void processKeyEventPress(KeyEvent ke) {
-        System.out.println(KeyEvent.KEY_PRESSED);
+
     }
 
     public void processKeyEventRelease(KeyEvent ke) {
