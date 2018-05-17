@@ -50,5 +50,7 @@ public class MenuState extends State {
             Game.loadState(new HelpState());
         }
     }
+    
+    public void processKeyEvent(KeyEvent ke) {}
 
 }
