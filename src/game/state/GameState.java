@@ -19,7 +19,7 @@ public class GameState extends State{
     }
 
     public void processKeyEventPress(KeyEvent ke){
-        int pressed = KeyEvent.KEY_PRESSED;
+
     }
 
     public void processKeyEventRelease(KeyEvent ke) {

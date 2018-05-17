@@ -1,4 +1,4 @@
 package game.player.inventory;
 
-public class Item {
+public abstract class Item {
 }

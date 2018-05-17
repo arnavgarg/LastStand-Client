@@ -20,7 +20,7 @@ public class MenuState extends State {
         if(start==null) {
             try {
                 start = ImageIO.read(getClass().getResource("/start.png"));
-            }catch (IOException e){
+            }catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -28,7 +28,7 @@ public class MenuState extends State {
         if(help == null) {
             try {
                 help = ImageIO.read(getClass().getResource("/help.png"));
-            }catch (IOException e){
+            }catch (IOException e) {
                 e.printStackTrace();
             }
         }
