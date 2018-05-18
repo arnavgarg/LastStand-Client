@@ -121,6 +121,8 @@ public class HelpState extends State{
     public void processKeyEventPress(KeyEvent ke) {
 
     }
+    
+    public void processKeyEvent(KeyEvent ke) {}
 
     public void processKeyEventRelease(KeyEvent ke) {
 

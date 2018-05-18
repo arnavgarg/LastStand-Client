@@ -7,13 +7,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class MenuState extends State {
 
-    private boolean hJoin = false;
-    private boolean hHelp = false;
-    private Image start;
+    private Image join;
     private Image help;
 
     public void render(Graphics g){
@@ -32,36 +31,33 @@ public class MenuState extends State {
                 e.printStackTrace();
             }
         }
+        
+        Image join = join.getScaledInstance(160, 55, Image.SCALE_DEFAULT);
+        Image help = help.getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+    }
 
-        g.drawImage(start, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
-        g.drawImage(help, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50, null);
+    public void render(Graphics g){
+        g.drawImage(join, Game.WIDTH/2 - 80, Game.HEIGHT/2 - 55, null);
+        g.drawImage(help, Game.WIDTH/2 - 23, Game.HEIGHT/2 + 55, null);
     }
 
     public void tick(){
-        int x = GameInfo.getInstance().getMouseX();
-        int y = GameInfo.getInstance().getMouseY();
-
-        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 75 && y <= Game.HEIGHT/2 + 125){
-            hJoin = true;
-        }else {
-            hJoin = false;
-        }
-
-        if(x >= Game.WIDTH/2 - 75 && x <= Game.WIDTH/2 + 75 && y >= Game.HEIGHT/2 + 150 && y <= Game.HEIGHT/2 + 200){
-            hHelp = true;
-        }else {
-            hHelp = false;
-        }
+        // don't know what we should put in here
     }
 
     public void processMouseEvent(MouseEvent me) {
-        if(hJoin){
+        int x = me.getX();
+        int y = me.getY();
+        
+        if(x > Game.WIDTH/2 - 80 && x < Game.WIDTH/2 + 80 && y > Game.HEIGHT/2 - 55 && y < Game.HEIGHT/2){
             Game.loadState(new ConnectState());
         }
-        if(hHelp){
+        if(x > Game.WIDTH/2 - 23 && x < Game.WIDTH/2 + 22 && y > Game.HEIGHT/2 + 55 && y < Game.HEIGHT/2 + 110){
             Game.loadState(new HelpState());
         }
     }
+    
+    public void processKeyEvent(KeyEvent ke) {}
 
     public void processKeyEventPress(KeyEvent ke) {
         System.out.println(KeyEvent.KEY_PRESSED);
