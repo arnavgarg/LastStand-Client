@@ -4,6 +4,7 @@ import game.main.Game;
 import game.main.GameInfo;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -16,7 +17,7 @@ public class HelpState extends State{
     public void render(Graphics g){
         if(up == null) {
             try {
-                up = ImageIO.read(getClass().getResource("/up.png"));
+                up = ImageIO.read(getClass().getResource("/w.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -24,7 +25,7 @@ public class HelpState extends State{
 
         if(left == null) {
             try {
-                left = ImageIO.read(getClass().getResource("/left.png"));
+                left = ImageIO.read(getClass().getResource("/a.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -32,7 +33,7 @@ public class HelpState extends State{
 
         if(right == null) {
             try {
-                right = ImageIO.read(getClass().getResource("/right.png"));
+                right = ImageIO.read(getClass().getResource("/d.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -40,7 +41,7 @@ public class HelpState extends State{
 
         if(down == null) {
             try {
-                down = ImageIO.read(getClass().getResource("/down.png"));
+                down = ImageIO.read(getClass().getResource("/s.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,7 +78,6 @@ public class HelpState extends State{
                 e.printStackTrace();
             }
         }
-
         g.drawImage(left, Game.WIDTH/5 - 40, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(down, Game.WIDTH/5, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(right, Game.WIDTH/5 + 40, Game.HEIGHT/2, 40, 40, null);

@@ -77,7 +77,6 @@ public class Game extends Canvas{
         int ticks = 0;
         int frames = 0;
         long timer = System.currentTimeMillis();
-
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
