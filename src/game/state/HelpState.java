@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class HelpState extends State{
-    private Image up, left, right, down, e, mouse, arrow, arrowR;
+    private Image up, left, right, down, e, mouse, arrow, arrowR, f;
     private boolean highL, highR = false;
 
     public void render(Graphics g){
@@ -64,7 +64,7 @@ public class HelpState extends State{
         }
 
         if(arrow == null) {
-            try{
+            try {
                 arrow = ImageIO.read(getClass().getResource("/arrow.gif"));
             }catch (IOException e) {
                 e.printStackTrace();
@@ -72,20 +72,49 @@ public class HelpState extends State{
         }
 
         if(arrowR == null) {
-            try{
+            try {
                 arrowR = ImageIO.read(getClass().getResource("/arrowRed.gif"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        if(f == null) {
+            try {
+                f = ImageIO.read(getClass().getResource("/f.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Draw keyboard keys
         g.drawImage(left, Game.WIDTH/5 - 40, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(down, Game.WIDTH/5, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(right, Game.WIDTH/5 + 40, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(up, Game.WIDTH/5, Game.HEIGHT/2 - 40, 40, 40, null);
         g.drawImage(e, Game.WIDTH/5 + 90, Game.HEIGHT/2 - 70, 40, 40, null);
+        g.drawImage(f, Game.WIDTH/5 + + 130, Game.HEIGHT/2, 40, 40, null);
 
+        //Draw key labels
+        g.setFont(new Font("Silon", Font.BOLD, 20));
+        g.drawString("Movement", Game.WIDTH/5 - 33, Game.HEIGHT/2 + 59);
+        g.drawString("Interact", Game.WIDTH/5 + 70, Game.HEIGHT/2 - 75);
+        g.drawString("Use", Game.WIDTH/5 + 130, Game.HEIGHT/2 + 59);
+
+        //Draw mouse labels
+        g.drawString("Move Cursor", Game.WIDTH - (Game.WIDTH/5) - 65, Game.HEIGHT/2 + 125);
+        g.drawString("Fire", Game.WIDTH - (Game.WIDTH/5) - 85, Game.HEIGHT/2);
+        g.drawString("Reload", Game.WIDTH - (Game.WIDTH/5) + 35, Game.HEIGHT/2);
+
+        //Draw arrow labels
+        g.setFont(new Font("Silon", Font.PLAIN, 12));
+        g.drawString("Back", 6, 40);
+        g.drawString("Play", Game.WIDTH-35, 40);
+
+        //Draw Mouse
         g.drawImage(mouse, Game.WIDTH - (Game.WIDTH/5) - 50, Game.HEIGHT/2 - 105, 100, 210, null);
 
+        //Draw arrows & highlight
         if(highL) {
             g.drawImage(arrowR, 0, 0, 36, 30, null);
         }else {
