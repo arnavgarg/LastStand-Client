@@ -4,10 +4,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class GameState extends State{
+public class GameState extends State {
 
+    public GameState() {
+
+	}
+    
     public void render(Graphics g){
-        //TODO - Render the game map
+        // TODO - render game map
     }
 
     public void tick(){
@@ -25,4 +29,5 @@ public class GameState extends State{
     public void processKeyEventRelease(KeyEvent ke) {
 
     }
+  
 }

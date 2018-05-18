@@ -5,6 +5,8 @@ import game.main.GameInfo;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+
 
 public class ConnectState extends State{
 
@@ -22,6 +24,8 @@ public class ConnectState extends State{
     public void processMouseEvent(MouseEvent me){
 
     }
+    
+    public void processKeyEvent(KeyEvent ke) {}
 
     public void processKeyEventPress(KeyEvent ke) {
 

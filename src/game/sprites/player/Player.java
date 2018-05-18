@@ -1,6 +1,6 @@
-package game.player;
+package game.sprites.player;
 
-import game.player.inventory.Item;
+import game.sprites.inventory.Item;
 
 import java.awt.*;
 
