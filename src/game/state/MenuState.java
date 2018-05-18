@@ -5,6 +5,7 @@ import game.main.GameInfo;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -13,18 +14,22 @@ public class MenuState extends State {
 
     private Image join;
     private Image help;
-    
-    public MenuState() {
-        try {
-            join = ImageIO.read(getClass().getResource("/res/joinbutton.png"));
-        } catch (IOException e){
-            e.printStackTrace();
+
+    public void render(Graphics g){
+        if(start==null) {
+            try {
+                start = ImageIO.read(getClass().getResource("/start.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        
-        try {
-            help = ImageIO.read(getClass().getResource("/res/helpbutton.png"));
-        } catch (IOException e){
-            e.printStackTrace();
+
+        if(help == null) {
+            try {
+                help = ImageIO.read(getClass().getResource("/help.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         
         Image join = join.getScaledInstance(160, 55, Image.SCALE_DEFAULT);
@@ -54,4 +59,11 @@ public class MenuState extends State {
     
     public void processKeyEvent(KeyEvent ke) {}
 
+    public void processKeyEventPress(KeyEvent ke) {
+        System.out.println(KeyEvent.KEY_PRESSED);
+    }
+
+    public void processKeyEventRelease(KeyEvent ke) {
+
+    }
 }

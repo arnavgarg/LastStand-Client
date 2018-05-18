@@ -22,11 +22,17 @@ public class GameInfo {
     }
 
     public int getMouseX(){
-        return (int) mouseLoc.getX();
+        if(mouseLoc == null) {
+            mouseLoc = new Point(0,0);
+        }
+        return (int)mouseLoc.getX();
     }
 
     public int getMouseY(){
-        return (int) mouseLoc.getY();
+        if(mouseLoc == null) {
+            mouseLoc = new Point(0,0);
+        }
+        return (int)mouseLoc.getY();
     }
 
 }

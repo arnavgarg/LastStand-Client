@@ -6,9 +6,7 @@ import game.state.StateLoader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -50,16 +48,19 @@ public class Game extends Canvas{
             public void mouseExited(MouseEvent e) {}
         });
         this.addKeyListener(new KeyListener() {
-
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
 
-            @Override
-            public void keyReleased(KeyEvent e) {}
+            }
 
             @Override
             public void keyPressed(KeyEvent e) {
-                loader.processKeyEvent(e);
+                loader.processKeyEventPress(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                loader.processKeyEventRelease(e);
             }
         });
         running = true;
@@ -70,7 +71,7 @@ public class Game extends Canvas{
         loader.load(s);
     }
 
-    public void run(){
+    private void run(){
         long lastTime = System.nanoTime();
         final double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -108,6 +109,7 @@ public class Game extends Canvas{
         }
         Graphics g = bs.getDrawGraphics();
 
+        g.clearRect(0, 0, WIDTH, HEIGHT);
         loader.render(g);
 
         g.dispose();
@@ -118,7 +120,6 @@ public class Game extends Canvas{
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
