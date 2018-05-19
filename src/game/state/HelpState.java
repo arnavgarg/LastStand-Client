@@ -4,7 +4,6 @@ import game.main.Game;
 import game.main.GameInfo;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -87,6 +86,8 @@ public class HelpState extends State{
             }
         }
 
+        MenuState.drawBackground(g);
+
         //Draw keyboard keys
         g.drawImage(left, Game.WIDTH/5 - 40, Game.HEIGHT/2, 40, 40, null);
         g.drawImage(down, Game.WIDTH/5, Game.HEIGHT/2, 40, 40, null);
@@ -96,6 +97,7 @@ public class HelpState extends State{
         g.drawImage(f, Game.WIDTH/5 + + 130, Game.HEIGHT/2, 40, 40, null);
 
         //Draw key labels
+        g.setColor(Color.BLACK);
         g.setFont(new Font("Silon", Font.BOLD, 20));
         g.drawString("Movement", Game.WIDTH/5 - 33, Game.HEIGHT/2 + 59);
         g.drawString("Interact", Game.WIDTH/5 + 70, Game.HEIGHT/2 - 75);

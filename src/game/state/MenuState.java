@@ -16,7 +16,7 @@ public class MenuState extends State {
     private Image join, joinH;
     private Image help, helpH;
 
-    private void drawBackground(Graphics g) {
+    static void drawBackground(Graphics g) {
         g.setColor(new Color(0, 180, 0));
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
     }
@@ -59,7 +59,6 @@ public class MenuState extends State {
 //        g.setColor(Color.BLACK);
 //        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
 //        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
-
 
         if(hJoin) {
             g.drawImage(joinH, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
