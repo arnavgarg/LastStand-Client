@@ -16,25 +16,39 @@ public class MenuState extends State {
     private Image start;
     private Image help;
 
+    private void drawBackground(Graphics g) {
+        g.setColor(new Color(0, 180, 0));
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+    }
+
     public void render(Graphics g){
-        if(start==null) {
-            try {
-                start = ImageIO.read(getClass().getResource("/start.png"));
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
+        drawBackground(g);
+
+        g.setColor(Color.BLACK);
+        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
+        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
+
+        g.setFont(new Font("Helvetica", Font.BOLD, 25));
+
+        if(hJoin) {
+            g.setColor(new Color(34, 73, 34));
+            g.fillRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
+            g.setColor(Color.WHITE);
+            g.drawString("Join", Game.WIDTH/2 - 28, Game.HEIGHT/2 + 108);
+        }else {
+            g.setColor(Color.BLACK);
+            g.drawString("Join", Game.WIDTH/2 - 28, Game.HEIGHT/2 + 108);
         }
 
-        if(help == null) {
-            try {
-                help = ImageIO.read(getClass().getResource("/help.png"));
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(hHelp) {
+            g.setColor(new Color(34, 73, 34));
+            g.fillRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
+            g.setColor(Color.WHITE);
+            g.drawString("Help", Game.WIDTH/2 - 28, Game.HEIGHT/2 + 183);
+        }else {
+            g.setColor(Color.BLACK);
+            g.drawString("Help", Game.WIDTH/2 - 28, Game.HEIGHT/2 + 183);
         }
-
-        g.drawImage(start, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
-        g.drawImage(help, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50, null);
     }
 
     public void tick(){
