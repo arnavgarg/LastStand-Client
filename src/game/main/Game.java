@@ -1,6 +1,5 @@
 package game.main;
 
-import game.state.GameState;
 import game.state.MenuState;
 import game.state.State;
 import game.state.StateLoader;
