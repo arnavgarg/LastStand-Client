@@ -78,8 +78,8 @@ public class ConnectState extends State{
         if(highL) {
             Game.loadState(new MenuState());
         }
-        if(highR) {
-            Game.loadState(new GameState());
+        if(highR && name.length() != 0) {
+            Game.loadState(new GameState(name));
         }
     }
 
