@@ -30,13 +30,17 @@ public class GameState extends State {
         checkImages();
         drawMap(g);
         drawPlayer(g);
-
+        drawGUI(g);
     }
 
     private void drawMap(Graphics g) {
 //        for(Object o : GameInfo.getInstance().getEntities()) {
 //            //
 //        }
+    }
+
+    private void drawGUI(Graphics g){
+
     }
 
     private void drawPlayer(Graphics g) {
