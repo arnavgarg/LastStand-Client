@@ -40,6 +40,7 @@ public class GameState extends State {
         checkImages();
         drawMap(g);
         player.render(g);
+        drawGUI(g);
     }
 
     private void drawMap(Graphics g) {
