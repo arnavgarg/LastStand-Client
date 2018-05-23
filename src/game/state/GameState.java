@@ -1,50 +1,52 @@
 package game.state;
 
+import game.map.Location;
+import game.sprites.player.Player;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.JSONObject;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
-import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class GameState extends State {
 
-    Image playerBody;
-    Image playerHand;
-    private int bodyX = 350;
-    private int bodyY = 250;
-    private int rightX = 430;
-    private int rightY = 245;
-    private int leftX = 345;
-    private int leftY = 245;
-	
-    public GameState() {
-		
-	try {
-		playerBody = ImageIO.read(getClass().getResource("/res/redcircle.png"));
-		playerHand = ImageIO.read(getClass().getResource("/res/redcircle.png"));
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-		
-		playerBody = playerBody.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-		playerHand = playerHand.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-		
-	}
+    private Player player;
+
+    private final String address = "http://54.201.138.236:8080/";
+
+    public GameState(String name) {
+        try {
+            player = createPlayer(name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	public void checkImages() {
+
+    }
     
-    public void render(Graphics g){
-		
-        // TODO - render game map
-        g.drawImage(playerBody, bodyX, bodyY, null);
-        g.drawImage(playerHand, rightX, rightY, null);
-        g.drawImage(playerHand, leftX, leftY, null);
-        
+    public void render(Graphics g) {
+        checkImages();
+        drawMap(g);
+        player.render(g);
+    }
+
+    private void drawMap(Graphics g) {
+//        for(Object o : GameInfo.getInstance().getEntities()) {
+//            //
+//        }
     }
 
     public void tick(){
-        //TODO - update the information of mouse in the class
+
     }
 
     public void processMouseEvent(MouseEvent me) {
@@ -57,6 +59,37 @@ public class GameState extends State {
 
     public void processKeyEventRelease(KeyEvent ke) {
 
+    }
+
+    private Player createPlayer(String name) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
+        con.setRequestMethod("PUT");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setDoInput(true);
+        con.setDoOutput(true);
+
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(json.toString());
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        if (responseCode != 200) {
+            System.out.println("[  ERROR  ] Response code of " + responseCode);
+            System.exit(1);
+        }
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        JSONObject res = new JSONObject(response.toString());
+        return new Player(res.getInt("id"), res.getString("name"), new Location(res.getDouble("x"), res.getDouble("y")));
     }
   
 }

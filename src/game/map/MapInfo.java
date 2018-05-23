@@ -9,6 +9,10 @@ public class MapInfo {
 
     private static MapInfo instance;
 
+    private MapInfo(){
+
+    }
+
     public static MapInfo getInstance(){
         if(instance == null){
             instance = new MapInfo();
@@ -23,7 +27,6 @@ public class MapInfo {
     public void setBoundaryRadius(int dr) {
         boundaryRadius = dr;
     }
-
 
     public Point getBoundaryCenter() {
         return boundaryCenter;

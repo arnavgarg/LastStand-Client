@@ -3,12 +3,15 @@ package game.main;
 import java.awt.*;
 
 public class GameInfo {
+    private Point mouseLoc, playerLoc;
+    private boolean up, left, right, down; //whether the keys are pressed, to move the player
+    private String playerName;
+//    private Object[] entities;
 
     //keeps track of mouse info
     private GameInfo() {}
 
     private static GameInfo instance = null;
-    private Point mouseLoc;
 
     public static GameInfo getInstance(){
         if(instance == null){
@@ -19,6 +22,9 @@ public class GameInfo {
 
     public void setMouseP(Point loc){
         mouseLoc = loc;
+    }
+    public void setPlayerName(String name) {
+        playerName = name;
     }
 
     public int getMouseX(){
@@ -34,5 +40,9 @@ public class GameInfo {
         }
         return (int)mouseLoc.getY();
     }
+
+//    public Object[] getEntities() {
+//        return entities;
+//    }
 
 }

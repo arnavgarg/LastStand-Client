@@ -7,63 +7,95 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class MenuState extends State {
 
-    private Image join;
-    private Image help;
+    private boolean hJoin = false;
+    private boolean hHelp = false;
+    private Image join, joinH;
+    private Image help, helpH;
+
+    static void drawBackground(Graphics g) {
+        g.setColor(new Color(0, 180, 0));
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+    }
 
     public void render(Graphics g){
-        if(start==null) {
-            try {
-                start = ImageIO.read(getClass().getResource("/start.png"));
+        if(join == null){
+            try{
+                join = ImageIO.read(getClass().getResource("/join.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         if(help == null) {
-            try {
+            try{
                 help = ImageIO.read(getClass().getResource("/help.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        
-        Image join = join.getScaledInstance(160, 55, Image.SCALE_DEFAULT);
-        Image help = help.getScaledInstance(55, 55, Image.SCALE_DEFAULT);
-    }
 
-    public void render(Graphics g){
-        g.drawImage(join, Game.WIDTH/2 - 80, Game.HEIGHT/2 - 55, null);
-        g.drawImage(help, Game.WIDTH/2 - 23, Game.HEIGHT/2 + 55, null);
+        if(joinH == null) {
+            try{
+                joinH = ImageIO.read(getClass().getResource("/joinH.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(helpH == null) {
+            try{
+                helpH = ImageIO.read(getClass().getResource("/helpH.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        drawBackground(g);
+
+//        g.setColor(Color.BLACK);
+//        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
+//        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
+
+        if(hJoin) {
+            g.drawImage(joinH, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
+        }else {
+            g.drawImage(join, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);
+        }
+
+        if(hHelp) {
+            g.drawImage(helpH, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50, null);
+        }else {
+            g.drawImage(help, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50, null);
+        }
     }
 
     public void tick(){
-        // don't know what we should put in here
+        int x = GameInfo.getInstance().getMouseX();
+        int y = GameInfo.getInstance().getMouseY();
+
+        hJoin = x >= Game.WIDTH / 2 - 75 && x <= Game.WIDTH / 2 + 75 && y >= Game.HEIGHT / 2 + 75 && y <= Game.HEIGHT / 2 + 125;
+        hHelp = x >= Game.WIDTH / 2 - 75 && x <= Game.WIDTH / 2 + 75 && y >= Game.HEIGHT / 2 + 150 && y <= Game.HEIGHT / 2 + 200;
     }
 
     public void processMouseEvent(MouseEvent me) {
-        int x = me.getX();
-        int y = me.getY();
-        
-        if(x > Game.WIDTH/2 - 80 && x < Game.WIDTH/2 + 80 && y > Game.HEIGHT/2 - 55 && y < Game.HEIGHT/2){
+        if(hJoin){
             Game.loadState(new ConnectState());
         }
-        if(x > Game.WIDTH/2 - 23 && x < Game.WIDTH/2 + 22 && y > Game.HEIGHT/2 + 55 && y < Game.HEIGHT/2 + 110){
+        if(hHelp){
             Game.loadState(new HelpState());
         }
     }
-    
-    public void processKeyEvent(KeyEvent ke) {}
 
     public void processKeyEventPress(KeyEvent ke) {
-        System.out.println(KeyEvent.KEY_PRESSED);
+
     }
 
     public void processKeyEventRelease(KeyEvent ke) {
 
     }
+
 }

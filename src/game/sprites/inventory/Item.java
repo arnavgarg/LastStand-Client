@@ -1,4 +1,4 @@
-package game.player.inventory;
+package game.sprites.inventory;
 
 public abstract class Item {
 }
