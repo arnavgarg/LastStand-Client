@@ -33,6 +33,8 @@ public class Player {
         this.loc = loc;
     }
 
+    public int getID() {return id;}
+
     public void render(Graphics g) {
         g.drawImage(image, Game.WIDTH/2 - 25, Game.HEIGHT/2 - 25, 50, 50, null);
         g.drawLine(Game.WIDTH/2, Game.HEIGHT/2, GameInfo.getInstance().getMouseX(), GameInfo.getInstance().getMouseY());

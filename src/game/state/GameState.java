@@ -1,5 +1,6 @@
 package game.state;
 
+import game.log.*;
 import game.map.Location;
 import game.sprites.player.Player;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -18,6 +19,7 @@ import java.net.URL;
 public class GameState extends State {
 
     private Player player;
+    private Log log;
 
     private final String address = "http://54.201.138.236:8080/";
 
@@ -27,6 +29,8 @@ public class GameState extends State {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        log = new Log(player.getID());
     }
 
 	public void checkImages() {
@@ -54,6 +58,29 @@ public class GameState extends State {
     }
 
     public void processKeyEventPress(KeyEvent ke){
+
+        Entry e;
+        int c = ke.getExtendedKeyCode();
+
+        if (c == KeyEvent.VK_W) {
+            e = new Entry(0, new String[0]);
+            log.addEntry(e);
+        }
+
+        if (c == KeyEvent.VK_D) {
+            e = new Entry(1, new String[0]);
+            log.addEntry(e);
+        }
+
+        if (c == KeyEvent.VK_S) {
+            e = new Entry(2, new String[0]);
+            log.addEntry(e);
+        }
+
+        if (c == KeyEvent.VK_A) {
+            e = new Entry(3, new String[0]);
+            log.addEntry(e);
+        }
 
     }
 
