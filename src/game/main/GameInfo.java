@@ -1,9 +1,11 @@
 package game.main;
 
+import game.map.Location;
+
 import java.awt.*;
 
 public class GameInfo {
-    private Point mouseLoc, playerLoc;
+    private Location mouseLoc, playerLoc;
     private boolean up, left, right, down; //whether the keys are pressed, to move the player
     private String playerName;
 //    private Object[] entities;
@@ -20,7 +22,7 @@ public class GameInfo {
         return instance;
     }
 
-    public void setMouseP(Point loc){
+    public void setMouseP(Location loc){
         mouseLoc = loc;
     }
     public void setPlayerName(String name) {
@@ -29,20 +31,20 @@ public class GameInfo {
 
     public int getMouseX(){
         if(mouseLoc == null) {
-            mouseLoc = new Point(0,0);
+            mouseLoc = new Location(0,0);
         }
         return (int)mouseLoc.getX();
     }
 
     public int getMouseY(){
         if(mouseLoc == null) {
-            mouseLoc = new Point(0,0);
+            mouseLoc = new Location(0,0);
         }
         return (int)mouseLoc.getY();
     }
 
-//    public Object[] getEntities() {
-//        return entities;
-//    }
+    public Location getMouseLoc() {
+        return mouseLoc;
+    }
 
 }

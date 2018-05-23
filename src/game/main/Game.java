@@ -1,5 +1,6 @@
 package game.main;
 
+import game.map.Location;
 import game.state.MenuState;
 import game.state.State;
 import game.state.StateLoader;
@@ -26,7 +27,7 @@ public class Game extends Canvas{
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                GameInfo.getInstance().setMouseP(e.getPoint());
+                GameInfo.getInstance().setMouseP(new Location(e.getX(), e.getY()));
             }
         });
         this.addMouseListener(new MouseListener() {

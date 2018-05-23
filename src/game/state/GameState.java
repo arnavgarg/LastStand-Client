@@ -1,8 +1,7 @@
 package game.state;
 
-import game.main.Game;
-import game.main.GameInfo;
 import game.map.Location;
+import game.map.Map;
 import game.sprites.player.Player;
 import org.json.JSONObject;
 
@@ -29,22 +28,10 @@ public class GameState extends State {
             e.printStackTrace();
         }
     }
-
-	public void checkImages() {
-
-    }
     
     public void render(Graphics g) {
-        checkImages();
-        drawMap(g);
-        player.render(g);
+        Map.render(g, player.getLoc(), player.getId());
         drawGUI(g);
-    }
-
-    private void drawMap(Graphics g) {
-//        for(Object o : GameInfo.getInstance().getEntities()) {
-//            //
-//        }
     }
 
     private void drawGUI(Graphics g){

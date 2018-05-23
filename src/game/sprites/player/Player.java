@@ -6,7 +6,7 @@ import game.map.Location;
 import game.sprites.inventory.Item;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -33,9 +33,32 @@ public class Player {
         this.loc = loc;
     }
 
+    public void render(Graphics g, Location l) {
+        g.drawImage(image, Game.WIDTH/2 - 25 - (int) (l.diffX(this.loc)),
+                Game.HEIGHT/2 - 25 - (int) (l.diffY(this.loc)), 50, 50, null);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+        g.drawString(name, Game.WIDTH/2 - (3*name.length()) - (int) (l.diffX(this.loc)),
+                Game.HEIGHT/2 - 27 - (int) (l.diffY(this.loc)));
+    }
+
     public void render(Graphics g) {
         g.drawImage(image, Game.WIDTH/2 - 25, Game.HEIGHT/2 - 25, 50, 50, null);
-        g.drawLine(Game.WIDTH/2, Game.HEIGHT/2, GameInfo.getInstance().getMouseX(), GameInfo.getInstance().getMouseY());
+        double angle = Math.atan2(GameInfo.getInstance().getMouseY() - Game.HEIGHT/2,
+                GameInfo.getInstance().getMouseX() - Game.WIDTH/2);
+        g.drawLine(Game.WIDTH/2, Game.HEIGHT/2, (int) (Game.WIDTH/2 + (50 * Math.cos(angle))),
+                (int) (Game.HEIGHT/2 + (50 * Math.sin(angle))));
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+        g.drawString(name, Game.WIDTH/2 - (3*name.length()), Game.HEIGHT/2 - 27);
+    }
+
+    public Location getLoc() {
+        return loc;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
