@@ -10,4 +10,7 @@ public class Entry {
         this.extras = extras;
     }
 
+    public int getID() { return id; }
+    public String[] getExtras() { return extras; }
+
 }

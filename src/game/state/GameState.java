@@ -3,7 +3,6 @@ package game.state;
 import game.log.*;
 import game.map.Location;
 import game.sprites.player.Player;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONObject;
 
 import java.awt.*;
