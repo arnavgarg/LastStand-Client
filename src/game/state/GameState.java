@@ -1,5 +1,6 @@
 package game.state;
 
+import game.main.Game;
 import game.map.Location;
 import game.map.Map;
 import game.sprites.player.Player;
@@ -19,7 +20,7 @@ public class GameState extends State {
 
     private Player player;
 
-    private final String address = "http://54.201.138.236:8080/";
+    private final String address = "http://54.201.138.236:8080/";//http://localhost:8080
 
     public GameState(String name) {
         try {
@@ -27,14 +28,26 @@ public class GameState extends State {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Map.addPlayer(player);
     }
     
     public void render(Graphics g) {
-        Map.render(g, player.getLoc(), player.getId());
+        player.updateAngle();
+        Map.render(g, player.getLoc());
         drawGUI(g);
     }
 
     private void drawGUI(Graphics g){
+        //draw health bar
+        g.setColor(Color.BLACK);
+        g.drawRect(Game.WIDTH/2 - 201, Game.HEIGHT - 31, 402, 22);
+        g.setColor(Color.CYAN);
+        g.fillRect(Game.WIDTH/2 - 201, Game.HEIGHT - 30, player.getHealth()*4, 20);
+        g.setColor(Color.WHITE);
+        g.fillRect(Game.WIDTH/2 - 201 + player.getHealth()*4, Game.HEIGHT - 30, 400 - (player.getHealth()*4), 20);
+
+        //draw inventory squares
+        g.setColor(Color.BLACK);
 
     }
 
@@ -76,7 +89,7 @@ public class GameState extends State {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
