@@ -4,15 +4,15 @@ import game.main.Game;
 import game.map.Location;
 import game.map.Map;
 import game.sprites.player.Player;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.json.JSONObject;
 
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -29,6 +29,25 @@ public class GameState extends State {
             e.printStackTrace();
         }
         Map.addPlayer(player);
+
+        playMusic();
+    }
+
+    private void playMusic() {
+//        Media song = new Media(getClass().getResource("/Rick Astley - Never Gonna Give You Up.mp3").toURI());
+        try {
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(getClass().getResource("/songs/" +
+                    "NeverGonnaGiveYouUp.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        }catch (IOException e) {
+
+        }catch (LineUnavailableException e) {
+
+        }catch (UnsupportedAudioFileException e) {
+
+        }
     }
     
     public void render(Graphics g) {
