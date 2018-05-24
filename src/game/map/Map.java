@@ -13,17 +13,17 @@ public class Map {
 
     }
 
+    public static void addPlayer(Player p) {
+        players.add(p);
+    }
+
     public static ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public static void render(Graphics g, Location loc, int id) {
+    public static void render(Graphics g, Location loc) {
         for(Player p : players) {
-            if(p.getId() == id) {
-                p.render(g);
-            }else if(p.getLoc().diffX(loc) <= 400 && p.getLoc().diffY(loc) <= 300) {
-                p.render(g, loc);
-            }
+            p.render(g, loc);
         }
     }
 }
