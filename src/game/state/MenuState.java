@@ -15,6 +15,7 @@ public class MenuState extends State {
     private boolean hHelp = false;
     private Image join, joinH;
     private Image help, helpH;
+    private Image title;
 
     static void drawBackground(Graphics g) {
         g.setColor(new Color(0, 180, 0));
@@ -53,10 +54,19 @@ public class MenuState extends State {
                 e.printStackTrace();
             }
         }
-
+        
+        if(title = null) {
+            try{
+            title = ImageIO.read(getClass().getResource("/MenuTitle.png"));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        
         drawBackground(g);
-
-//        g.setColor(Color.BLACK);
+        // g.drawImage();
+//      
+        g.setColor(Color.BLACK);
 //        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
 //        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
 
