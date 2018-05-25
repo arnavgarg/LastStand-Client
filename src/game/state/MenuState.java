@@ -57,7 +57,7 @@ public class MenuState extends State {
 
         if(title == null) {
             try {
-                title = ImageIO.read(getClass().getResource("/title.png"));
+                title = ImageIO.read(getClass().getResource("/MenuTitle.png"));
             }catch (IOException e) {
                 e.printStackTrace();
             }
