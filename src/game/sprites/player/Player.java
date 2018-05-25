@@ -57,7 +57,7 @@ public class Player {
         ((Graphics2D)g).rotate(this.angle);
         g.drawImage(gun, 10, -3, 60, 7, null);
         ((Graphics2D)g).rotate(-this.angle);
-        g.translate(-Game.WIDTH/2, -Game.HEIGHT/2);
+        g.translate(-Game.WIDTH/2 + (int) (l.diffX(this.loc)), -Game.HEIGHT/2 + (int) (l.diffY(this.loc)));
     }
 
     public void render(Graphics g, Location l) {

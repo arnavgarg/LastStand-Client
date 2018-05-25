@@ -20,6 +20,10 @@ public class GameState extends State {
 
     private final String address = "http://54.201.138.236:8080/";//http://localhost:8080
 
+    private boolean up, left, right, down;
+
+    private int tempCounter = 0;
+
     public GameState(String name) {
         try {
             player = createPlayer(name);
@@ -32,15 +36,16 @@ public class GameState extends State {
         }else {
             Music.playMusic();
         }
+        Map m = new Map();
     }
     
     public void render(Graphics g) {
         player.updateAngle();
         Map.render(g, player.getLoc());
-        drawGUI(g);
+        drawHUD(g);
     }
 
-    private void drawGUI(Graphics g){
+    private void drawHUD(Graphics g){
         //draw health bar
         g.setColor(Color.BLACK);
         g.drawRect(Game.WIDTH/2 - 201, Game.HEIGHT - 31, 402, 22);
@@ -51,11 +56,29 @@ public class GameState extends State {
 
         //draw inventory squares
         g.setColor(Color.BLACK);
-
+        for(int i=0; i<5; i++) {
+            g.drawRect(Game.WIDTH - 200 + (i*40), Game.HEIGHT-40, 40, 40);
+        }
     }
 
     public void tick(){
-
+        tempCounter++;
+        if(tempCounter/7 >=1) {
+            if (left) {
+                player.getLoc().setX(player.getLoc().getX()-10);
+            }
+            if (right) {
+                player.getLoc().setX(player.getLoc().getX()+10);
+            }
+            if (up) {
+                player.getLoc().setY(player.getLoc().getY()-10);
+            }
+            if (down) {
+                player.getLoc().setY(player.getLoc().getY()+10);
+            }
+            tempCounter%=7;
+        }
+        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
     }
 
     public void processMouseEvent(MouseEvent me) {
@@ -63,11 +86,40 @@ public class GameState extends State {
     }
 
     public void processKeyEventPress(KeyEvent ke){
-
+        int code = ke.getKeyCode();
+        System.out.println(code);
+        switch (code){
+            case 37:
+                left = true;
+                break;
+            case 38:
+                up = true;
+                break;
+            case 39:
+                right = true;
+                break;
+            case 40:
+                down = true;
+                break;
+        }
     }
 
     public void processKeyEventRelease(KeyEvent ke) {
-
+        int code = ke.getKeyCode();
+        switch (code){
+            case 37:
+                left = false;
+                break;
+            case 38:
+                up = false;
+                break;
+            case 39:
+                right = false;
+                break;
+            case 40:
+                down = false;
+                break;
+        }
     }
 
     private Player createPlayer(String name) throws IOException {
