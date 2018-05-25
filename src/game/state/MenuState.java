@@ -2,6 +2,7 @@ package game.state;
 
 import game.main.Game;
 import game.main.GameInfo;
+import game.main.Music;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,6 +16,10 @@ public class MenuState extends State {
     private boolean hHelp = false;
     private Image join, joinH;
     private Image help, helpH;
+
+    public MenuState() {
+        Music.initMusic();
+    }
 
     static void drawBackground(Graphics g) {
         g.setColor(new Color(0, 180, 0));
@@ -55,10 +60,6 @@ public class MenuState extends State {
         }
 
         drawBackground(g);
-
-//        g.setColor(Color.BLACK);
-//        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50);
-//        g.drawRect(Game.WIDTH/2 - 75, Game.HEIGHT/2 + 150, 150, 50);
 
         if(hJoin) {
             g.drawImage(joinH, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);

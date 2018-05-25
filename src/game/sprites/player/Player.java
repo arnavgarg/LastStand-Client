@@ -55,7 +55,7 @@ public class Player {
     private void drawGun(Graphics g, Location l) {
         g.translate(Game.WIDTH/2 - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - (int) (l.diffY(this.loc)));
         ((Graphics2D)g).rotate(this.angle);
-        g.drawImage(gun, 10, -2, 50, 5, null);
+        g.drawImage(gun, 10, -3, 60, 7, null);
         ((Graphics2D)g).rotate(-this.angle);
         g.translate(-Game.WIDTH/2, -Game.HEIGHT/2);
     }
@@ -84,6 +84,10 @@ public class Player {
 
     public int getHealth() {
         return health;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

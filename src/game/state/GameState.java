@@ -1,14 +1,12 @@
 package game.state;
 
 import game.main.Game;
+import game.main.Music;
 import game.map.Location;
 import game.map.Map;
 import game.sprites.player.Player;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import org.json.JSONObject;
 
-import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -29,24 +27,10 @@ public class GameState extends State {
             e.printStackTrace();
         }
         Map.addPlayer(player);
-
-        playMusic();
-    }
-
-    private void playMusic() {
-//        Media song = new Media(getClass().getResource("/Rick Astley - Never Gonna Give You Up.mp3").toURI());
-        try {
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(getClass().getResource("/songs/" +
-                    "NeverGonnaGiveYouUp.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
-        }catch (IOException e) {
-
-        }catch (LineUnavailableException e) {
-
-        }catch (UnsupportedAudioFileException e) {
-
+        if(player.getName().equals("RickAstley")) {
+            Music.rickRoll();
+        }else {
+            Music.playMusic();
         }
     }
     
