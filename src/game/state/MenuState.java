@@ -14,16 +14,12 @@ public class MenuState extends State {
 
     private boolean hJoin = false;
     private boolean hHelp = false;
-    private Image join, joinH;
-    private Image help, helpH;
+    private static Image join, joinH;
+    private static Image help, helpH;
+    private static Image title;
 
     public MenuState() {
         Music.initMusic();
-    }
-
-    static void drawBackground(Graphics g) {
-        g.setColor(new Color(0, 180, 0));
-        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
     }
 
     public void render(Graphics g){
@@ -59,7 +55,16 @@ public class MenuState extends State {
             }
         }
 
-        drawBackground(g);
+        if(title == null) {
+            try {
+                title = ImageIO.read(getClass().getResource("/title.png"));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        State.drawBackground(g);
+        g.drawImage(title, 0, 0, Game.WIDTH, Game.HEIGHT/2 - 10, null);
 
         if(hJoin) {
             g.drawImage(joinH, Game.WIDTH/2 - 75, Game.HEIGHT/2 + 75, 150, 50, null);

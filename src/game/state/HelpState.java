@@ -39,7 +39,7 @@ public class HelpState extends State{
             }
         }
 
-        MenuState.drawBackground(g);
+        State.drawBackground(g);
 
         g.drawImage(helpScreen, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 
