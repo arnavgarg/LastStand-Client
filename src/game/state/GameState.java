@@ -34,7 +34,7 @@ public class GameState extends State {
     }
     
     public void render(Graphics g) {
-        Map.render(g, player.getLoc(), player.getId());
+        Map.render(g, player.getLoc(), player.getID());
         drawGUI(g);
     }
 

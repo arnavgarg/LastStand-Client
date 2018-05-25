@@ -1,6 +1,7 @@
 package game.log;
 
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 public class Log {
 
     private ArrayList<Entry> entries;
-    private final int playerID;
+    private int playerID;
 
     public Log(int playerID) {
         entries = new ArrayList<Entry>();
@@ -21,27 +22,26 @@ public class Log {
         entries.add(e);
     }
 
-    public void marshal() {
-        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
-        con.setRequestMethod("PUT");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoInput(true);
-        con.setDoOutput(true);
+    public JSONObject marshal() throws ProtocolException {
+//        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
+//        con.setRequestMethod("PUT");
+//        con.setRequestProperty("Content-Type", "application/json");
+//        con.setDoInput(true);
+//        con.setDoOutput(true);
 
-        String player = Integer.toString(playerID);
         JSONObject json = new JSONObject();
         JSONArray log = new JSONArray();
-        JSONObject entry = new JSONObject();
 
         for (int i = 0; i < entries.size(); i++) {
-            entry.put("id", Integer.toString(entries.get(i).getID()));
+            JSONObject entry = new JSONObject();
+            entry.put("id", entries.get(i).getID());
             entry.put("extras", entries.get(i).getExtras());
             log.put(entry);
         }
 
-        json.put("player", player);
+        json.put("player", playerID);
         json.put("log", log);
-
+        return json;
     }
 
 
