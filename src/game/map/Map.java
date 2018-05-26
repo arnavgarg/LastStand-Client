@@ -10,6 +10,7 @@ public class Map {
     private static ArrayList<Player> players = new ArrayList<>();
 
     public Map(){
+        //testing temporary players
         players.add(new Player(2, "Number 1", new Location(0,0)));
         players.add(new Player(3, "Number 2", new Location(1000,1000)));
         players.add(new Player(4, "Number 3", new Location(2000,2000)));
