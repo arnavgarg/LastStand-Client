@@ -55,7 +55,8 @@ public class GameState extends State {
         g.setColor(Color.CYAN);
         g.fillRect(Game.WIDTH/2 - 201, Game.HEIGHT - 30, player.getHealth()*4, 20);
         g.setColor(Color.WHITE);
-        g.fillRect(Game.WIDTH/2 - 201 + player.getHealth()*4, Game.HEIGHT - 30, 400 - (player.getHealth()*4), 20);
+        g.fillRect(Game.WIDTH/2 - 201 + player.getHealth()*4, Game.HEIGHT - 30, 400 -
+                (player.getHealth()*4), 20);
 
         //draw inventory squares
         g.setColor(Color.BLACK);
@@ -109,28 +110,6 @@ public class GameState extends State {
     }
 
     public void processKeyEventPress(KeyEvent ke){
-//        Entry e;
-//        int c = ke.getExtendedKeyCode();
-//
-//        if (c == KeyEvent.VK_W) {
-//            e = new Entry(0, new String[0]);
-//            log.addEntry(e);
-//        }
-//
-//        if (c == KeyEvent.VK_D) {
-//            e = new Entry(1, new String[0]);
-//            log.addEntry(e);
-//        }
-//
-//        if (c == KeyEvent.VK_S) {
-//            e = new Entry(2, new String[0]);
-//            log.addEntry(e);
-//        }
-//
-//        if (c == KeyEvent.VK_A) {
-//            e = new Entry(3, new String[0]);
-//            log.addEntry(e);
-//        }
         int code = ke.getKeyCode();
         switch (code){
             case 37:
@@ -194,7 +173,8 @@ public class GameState extends State {
         }
 
         JSONObject res = new JSONObject(response.toString());
-        return new Player(res.getInt("id"), res.getString("name"), new Location(res.getDouble("x"), res.getDouble("y")));
+        return new Player(res.getInt("id"), res.getString("name"),
+                new Location(res.getDouble("x"), res.getDouble("y")));
     }
   
 }
