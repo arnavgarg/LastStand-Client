@@ -2,6 +2,7 @@ package game.state;
 
 import game.main.Game;
 import game.main.Music;
+import game.log.*;
 import game.map.Location;
 import game.map.Map;
 import game.sprites.player.Player;
@@ -17,6 +18,7 @@ import java.net.URL;
 public class GameState extends State {
 
     private Player player;
+    private Log log;
 
     private final String address = "http://54.201.138.236:8080/";//http://localhost:8080
 
@@ -36,7 +38,8 @@ public class GameState extends State {
         }else {
             Music.playMusic();
         }
-        Map m = new Map();
+
+        log = new Log(player.getId());
     }
     
     public void render(Graphics g) {
@@ -62,6 +65,7 @@ public class GameState extends State {
     }
 
     public void tick(){
+        //temporary local movement
         tempCounter++;
         if(tempCounter/7 >=1) {
             if (left) {
@@ -79,6 +83,25 @@ public class GameState extends State {
             tempCounter%=7;
         }
         System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
+
+
+        Entry e;
+        if(up){
+            e = new Entry(0, new String[0]);
+            log.addEntry(e);
+        }
+        if(right){
+            e = new Entry(0, new String[0]);
+            log.addEntry(e);
+        }
+        if(down){
+            e = new Entry(0, new String[0]);
+            log.addEntry(e);
+        }
+        if(left){
+            e = new Entry(0, new String[0]);
+            log.addEntry(e);
+        }
     }
 
     public void processMouseEvent(MouseEvent me) {
@@ -86,8 +109,29 @@ public class GameState extends State {
     }
 
     public void processKeyEventPress(KeyEvent ke){
+//        Entry e;
+//        int c = ke.getExtendedKeyCode();
+//
+//        if (c == KeyEvent.VK_W) {
+//            e = new Entry(0, new String[0]);
+//            log.addEntry(e);
+//        }
+//
+//        if (c == KeyEvent.VK_D) {
+//            e = new Entry(1, new String[0]);
+//            log.addEntry(e);
+//        }
+//
+//        if (c == KeyEvent.VK_S) {
+//            e = new Entry(2, new String[0]);
+//            log.addEntry(e);
+//        }
+//
+//        if (c == KeyEvent.VK_A) {
+//            e = new Entry(3, new String[0]);
+//            log.addEntry(e);
+//        }
         int code = ke.getKeyCode();
-        System.out.println(code);
         switch (code){
             case 37:
                 left = true;
