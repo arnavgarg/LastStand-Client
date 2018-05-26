@@ -38,7 +38,7 @@ public class GameState extends State {
         }else {
             Music.playMusic();
         }
-
+        Map m = new Map();
         log = new Log(player.getId());
     }
     
@@ -51,12 +51,12 @@ public class GameState extends State {
     private void drawHUD(Graphics g){
         //draw health bar
         g.setColor(Color.BLACK);
-        g.drawRect(Game.WIDTH/2 - 201, Game.HEIGHT - 31, 402, 22);
+        g.drawRect(Game.WIDTH/2 - 151, Game.HEIGHT - 26, 302, 12);
         g.setColor(Color.CYAN);
-        g.fillRect(Game.WIDTH/2 - 201, Game.HEIGHT - 30, player.getHealth()*4, 20);
+        g.fillRect(Game.WIDTH/2 - 150, Game.HEIGHT - 25, player.getHealth()*3, 10);
         g.setColor(Color.WHITE);
-        g.fillRect(Game.WIDTH/2 - 201 + player.getHealth()*4, Game.HEIGHT - 30, 400 -
-                (player.getHealth()*4), 20);
+        g.fillRect(Game.WIDTH/2 - 150 + player.getHealth()*3, Game.HEIGHT - 25, 300 -
+                (player.getHealth()*3), 10);
 
         //draw inventory squares
         g.setColor(Color.BLACK);
