@@ -9,7 +9,7 @@ public class Music {
 
     public static void playMusic() {
         //random generate an index
-        int i=0;
+        int i= (int) (Math.random()*music.length);
         try {
             Clip clip = AudioSystem.getClip();
             clip.open(music[i]);
@@ -33,6 +33,7 @@ public class Music {
             try {
                 rickroll = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/NeverGonnaGiveYouUp.wav"));
                 music[0] = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/RocketRace.wav"));
+                music[1] = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/Warhead.wav"));
             }catch (IOException|UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
