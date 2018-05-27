@@ -20,11 +20,11 @@ public class GameState extends State {
     private Player player;
     private Log log;
 
-    private final String address = "http://54.201.138.236:8080/";//http://localhost:8080
-
+    private final String address = "http://localhost:8080";//"http://54.201.138.236:8080/";//http://localhost:8080
     private boolean up, left, right, down;
-
     private int tempCounter = 0;
+
+    private boolean drawBack = true;
 
     public GameState(String name) {
         try {
@@ -43,6 +43,14 @@ public class GameState extends State {
     }
     
     public void render(Graphics g) {
+        if(drawBack){
+            System.out.println("here");
+            Color c = g.getColor();
+            g.setColor(new Color(0,100,0));
+            g.fillRect(0,0,4000, 4000);
+            g.setColor(c);
+            drawBack = false;
+        }
         player.updateAngle();
         Map.render(g, player.getLoc());
         drawHUD(g);
@@ -112,16 +120,16 @@ public class GameState extends State {
     public void processKeyEventPress(KeyEvent ke){
         int code = ke.getKeyCode();
         switch (code){
-            case 37:
+            case 65:
                 left = true;
                 break;
-            case 38:
+            case 87:
                 up = true;
                 break;
-            case 39:
+            case 68:
                 right = true;
                 break;
-            case 40:
+            case 83:
                 down = true;
                 break;
         }
@@ -130,16 +138,16 @@ public class GameState extends State {
     public void processKeyEventRelease(KeyEvent ke) {
         int code = ke.getKeyCode();
         switch (code){
-            case 37:
+            case 65:
                 left = false;
                 break;
-            case 38:
+            case 87:
                 up = false;
                 break;
-            case 39:
+            case 68:
                 right = false;
                 break;
-            case 40:
+            case 83:
                 down = false;
                 break;
         }
