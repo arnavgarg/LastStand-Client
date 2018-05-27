@@ -1,25 +1,42 @@
 package game.map;
 
+import game.sprites.Rock;
+import game.sprites.player.Player;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Map {
+
     private Point boundaryCenter;
-    private static ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Rock> rocks;
 
-    public Map(){
-
+    public Map(ArrayList<Rock> rocks) {
+        this.rocks = rocks;
     }
 
-    public static ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public static void render(Graphics g, Location loc, int id) {
+    public void render(Graphics g, Location loc, int id) {
         for(Player p : players) {
             if(p.getId() == id) {
-                p.render(g);
+                p.render(g, loc);
             }else if(p.getLoc().diffX(loc) <= 400 && p.getLoc().diffY(loc) <= 300) {
                 p.render(g, loc);
+            }
+        }
+    }
+
+    public void applyUpdates(ArrayList<Player> playersUpdated) {
+        for (Player player : playersUpdated) {
+            int i = players.indexOf(player);
+            if (i != -1) {
+                players.set(i, player);
+            } else {
+                players.add(player);
             }
         }
     }

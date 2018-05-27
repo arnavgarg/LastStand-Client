@@ -1,11 +1,15 @@
 package game.state;
 
 import game.log.*;
+import game.main.Game;
 import game.map.Location;
 import game.map.Map;
+import game.sprites.Rock;
 import game.sprites.player.Player;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -15,26 +19,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GameState extends State {
 
+    private Map map;
     private Player player;
     private Log log;
 
-    private final String address = "http://54.201.138.236:8080/";
-
-    public GameState(String name) {
-        try {
-            player = createPlayer(name);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        log = new Log(player.getID());
+    public GameState(Player player, ArrayList<Rock> rocks) {
+        this.player = player;
+        log = new Log(player.getId());
+        map = new Map(rocks);
     }
     
     public void render(Graphics g) {
-        Map.render(g, player.getLoc(), player.getId());
+        map.render(g, player.getLoc(), player.getId());
         drawGUI(g);
     }
 
@@ -43,7 +43,13 @@ public class GameState extends State {
     }
 
     public void tick(){
-
+        try {
+            updateServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error Connecting to Server");
+            System.exit(0);
+        }
     }
 
     public void processMouseEvent(MouseEvent me) {
@@ -77,21 +83,21 @@ public class GameState extends State {
 
     }
 
+
+
     public void processKeyEventRelease(KeyEvent ke) {
 
     }
 
-    private Player createPlayer(String name) throws IOException {
-        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
-        con.setRequestMethod("PUT");
+    private void updateServer() throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(Game.ADDRESS).openConnection();
+        con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoInput(true);
         con.setDoOutput(true);
 
-        JSONObject json = new JSONObject();
-        json.put("name", name);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(json.toString());
+        wr.writeBytes(log.marshal().toString());
         wr.flush();
         wr.close();
 
@@ -103,13 +109,19 @@ public class GameState extends State {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
 
         JSONObject res = new JSONObject(response.toString());
-        return new Player(res.getInt("id"), res.getString("name"), new Location(res.getDouble("x"), res.getDouble("y")));
+        JSONArray playerArr = res.getJSONArray("players");
+        ArrayList<Player> players = new ArrayList<>();
+        for (int i = 0; i < playerArr.length(); i++) {
+            JSONObject playerObj = playerArr.getJSONObject(i);
+            players.add(new Player(playerObj.getInt("id"), playerObj.getString("name"), new Location(playerObj.getDouble("x"), playerObj.getDouble("y"))));
+        }
+        map.applyUpdates(players);
     }
   
 }
