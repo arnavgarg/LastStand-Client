@@ -91,8 +91,6 @@ public class GameState extends State {
             }
             tempCounter%=7;
         }
-        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
-
 
         Entry e;
         if(up){
@@ -100,21 +98,28 @@ public class GameState extends State {
             log.addEntry(e);
         }
         if(right){
-            e = new Entry(0, new String[0]);
+            e = new Entry(1, new String[0]);
             log.addEntry(e);
         }
         if(down){
-            e = new Entry(0, new String[0]);
+            e = new Entry(2, new String[0]);
             log.addEntry(e);
         }
         if(left){
-            e = new Entry(0, new String[0]);
+            e = new Entry(3, new String[0]);
             log.addEntry(e);
+        }
+
+        if(!Music.isRunning()) {
+            Music.playMusic();
         }
     }
 
     public void processMouseEvent(MouseEvent me) {
-
+        if(me.getButton() == 1) {
+            String[] temp = {player.getAngle() + ""};
+            log.addEntry(new Entry(4, temp));
+        }
     }
 
     public void processKeyEventPress(KeyEvent ke){
