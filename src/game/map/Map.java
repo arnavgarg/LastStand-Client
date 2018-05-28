@@ -16,6 +16,12 @@ public class Map {
         this.rocks = rocks;
     }
 
+    public void tick() {
+        for (Player p : players) {
+            p.tick();
+        }
+    }
+
     public void render(Graphics g, Location loc, int id) {
         for(Player p : players) {
             if(p.getId() == id) {

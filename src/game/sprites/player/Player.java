@@ -47,9 +47,8 @@ public class Player {
         this.health = 100;
     }
 
-    public void updateAngle() {
-        angle = Math.atan2(GameInfo.getInstance().getMouseY() - Game.HEIGHT/2, GameInfo.getInstance().getMouseX() -
-                Game.WIDTH/2);
+    public void tick() {
+        angle = Math.atan2(GameInfo.getInstance().getMouseY() - Game.HEIGHT/2, GameInfo.getInstance().getMouseX() - Game.WIDTH/2);
     }
 
     private void drawGun(Graphics g, Location l) {

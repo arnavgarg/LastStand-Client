@@ -51,7 +51,6 @@ public class GameState extends State {
             g.setColor(c);
             drawBack = false;
         }
-        player.updateAngle();
         map.render(g, player.getLoc());
         drawHUD(g);
     }
@@ -104,6 +103,8 @@ public class GameState extends State {
         if(left){
             log.addEntry(new Entry(0, new String[0]));
         }
+
+        map.tick();
       
         try {
             updateServer();
