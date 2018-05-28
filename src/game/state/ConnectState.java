@@ -130,7 +130,7 @@ public class ConnectState extends State{
 
         int responseCode = con.getResponseCode();
         if (responseCode != 200) {
-            System.out.println("[  ERROR  ] Response code of " + responseCode);
+            System.out.println("[  ERROR  ] Response code of " + responseCode + " after PUT request");
             System.exit(1);
         }
 

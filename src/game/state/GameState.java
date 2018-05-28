@@ -91,7 +91,7 @@ public class GameState extends State {
 
     private void updateServer() throws IOException {
         HttpURLConnection con = (HttpURLConnection) new URL(Game.ADDRESS).openConnection();
-        con.setRequestMethod("GET");
+        con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoInput(true);
         con.setDoOutput(true);
@@ -103,7 +103,7 @@ public class GameState extends State {
 
         int responseCode = con.getResponseCode();
         if (responseCode != 200) {
-            System.out.println("[  ERROR  ] Response code of " + responseCode);
+            System.out.println("[  ERROR  ] Response code of " + responseCode + " after GET request");
             System.exit(1);
         }
 
