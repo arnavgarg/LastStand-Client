@@ -112,7 +112,13 @@ public class ConnectState extends State{
             name = name.substring(0, name.length()-1);
         }
         if(ke.getKeyCode() == 10 && name.length() != 0) {
-            Game.loadState(new GameState(name));
+            try {
+                startGame(name);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error Connecting to Server");
+                System.exit(1);
+            }
         }
     }
 

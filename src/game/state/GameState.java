@@ -3,7 +3,6 @@ package game.state;
 import game.main.Game;
 import game.main.Music;
 import game.log.*;
-import game.main.Game;
 import game.map.Location;
 import game.map.Map;
 import game.sprites.Rock;
@@ -34,19 +33,18 @@ public class GameState extends State {
   
     public GameState(Player player, ArrayList<Rock> rocks) {
         this.player = player;
-        Map.addPlayer(player);
+        map = new Map(rocks);
+        map.addPlayer(player);
         if(player.getName().equals("RickAstley")) {
             Music.rickRoll();
         }else {
             Music.playMusic();
         }
-        Map m = new Map(rocks);
         log = new Log(player.getId());
     }
   
     public void render(Graphics g) {
         if(drawBack){
-            System.out.println("here");
             Color c = g.getColor();
             g.setColor(new Color(0,100,0));
             g.fillRect(0,0,4000, 4000);
@@ -54,7 +52,7 @@ public class GameState extends State {
             drawBack = false;
         }
         player.updateAngle();
-        Map.render(g, player.getLoc());
+        map.render(g, player.getLoc());
         drawHUD(g);
     }
 
@@ -93,7 +91,6 @@ public class GameState extends State {
             }
             tempCounter%=7;
         }
-        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
 
         if(up){
             log.addEntry(new Entry(0, new String[0]));

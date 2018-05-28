@@ -1,6 +1,7 @@
 package game.sprites.player;
 
 import game.main.Game;
+import game.main.GameInfo;
 import game.map.Location;
 import game.sprites.inventory.Item;
 
@@ -58,16 +59,7 @@ public class Player {
         ((Graphics2D)g).rotate(-this.angle);
         g.translate(-Game.WIDTH/2 + (int) (l.diffX(this.loc)), -Game.HEIGHT/2 + (int) (l.diffY(this.loc)));
     }
-    
-    public void render(Graphics g, Location l) {
-        g.drawImage(image, Game.WIDTH/2 - 25 - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - 25 - (int) (l.diffY(this.loc)), 50, 50, null);
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
-        g.drawString(name, Game.WIDTH/2 - (3*name.length()) - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - 27 - (int) (l.diffY(this.loc)));
-    }
-    
-    public int getId() {return id;}
-  
+
     public void render(Graphics g, Location l) {
         g.drawImage(image, Game.WIDTH/2 - 25 - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - 25 - (int) (l.diffY(this.loc)), 50, 50, null);
         drawGun(g, l);
@@ -98,10 +90,7 @@ public class Player {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Player){
-            return this.id == ((Player) o).id;
-        }
-        return false;
+        return o instanceof Player && this.id == ((Player) o).id;
     }
 
 }

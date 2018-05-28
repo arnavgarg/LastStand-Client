@@ -16,10 +16,6 @@ public class Map {
         this.rocks = rocks;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
     public void render(Graphics g, Location loc, int id) {
         for(Player p : players) {
             if(p.getId() == id) {
