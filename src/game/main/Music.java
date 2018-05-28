@@ -24,10 +24,20 @@ public class Music {
 
     public static void rickRoll() {
         try {
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(rickroll);
             clip.start();
         }catch (LineUnavailableException|IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void shoot() {
+        try {
+            Clip c = AudioSystem.getClip();
+            c.open(AudioSystem.getAudioInputStream(Music.class.getResource("/songs/shot.wav")));
+            c.start();
+        }catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
     }

@@ -120,6 +120,7 @@ public class Game extends Canvas{
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        game.setBackground(new Color(117, 214, 57));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);

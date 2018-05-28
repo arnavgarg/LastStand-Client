@@ -117,6 +117,7 @@ public class GameState extends State {
 
     public void processMouseEvent(MouseEvent me) {
         if(me.getButton() == 1) {
+            Music.shoot();
             String[] temp = {player.getAngle() + ""};
             log.addEntry(new Entry(4, temp));
         }
