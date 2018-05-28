@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -31,7 +32,7 @@ public class ConnectState extends State{
     private Image arrowR, arrow;
 
     public void render(Graphics g){
-        MenuState.drawBackground(g);//TODO put in state
+        State.drawBackground(g);//TODO put in state
 
         if(arrow == null) {
             try {
@@ -109,6 +110,9 @@ public class ConnectState extends State{
         }
         if(ke.getKeyCode() == 8 && name.length()>0) {
             name = name.substring(0, name.length()-1);
+        }
+        if(ke.getKeyCode() == 10 && name.length() != 0) {
+            Game.loadState(new GameState(name));
         }
     }
 

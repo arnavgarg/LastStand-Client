@@ -1,6 +1,8 @@
 package game.log;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -11,7 +13,8 @@ import org.json.JSONObject;
 public class Log {
 
     private ArrayList<Entry> entries;
-    private final int playerID;
+    private int playerID;
+    private String address = "http://54.201.138.236:8080/";
 
     public Log(int playerID) {
         entries = new ArrayList<>();
@@ -21,7 +24,7 @@ public class Log {
     public void addEntry(Entry e) {
         entries.add(e);
     }
-
+  
     public JSONObject marshal() {
         JSONObject json = new JSONObject();
         json.put("player", playerID);

@@ -40,4 +40,18 @@ public class Map {
             }
         }
     }
+  
+    public void addPlayer(Player p) {
+        players.add(p); 
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void render(Graphics g, Location loc) {
+        for(Player p : players) {
+            p.render(g, loc);
+        }
+    }
 }
