@@ -4,17 +4,20 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 
 public class Music {
-    private static AudioInputStream[] music = new AudioInputStream[2];
+    private static String[] music = new String[2];
     private static AudioInputStream rickroll;
+    private static Clip clip;
 
     public static void playMusic() {
-        //random generate an index
-        int i= (int) (Math.random()*music.length);
+        System.out.println("playing music");
         try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(music[i]);
+            //random generate an index
+            int i = (int) (Math.random() * music.length);
+
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Music.class.getResource("/songs/" + music[i])));
             clip.start();
-        }catch (LineUnavailableException|IOException e) {
+        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
     }
@@ -29,11 +32,16 @@ public class Music {
         }
     }
 
+    public static boolean isRunning() {
+        return clip.isActive();
+    }
+
+
     public static void initMusic(){
             try {
                 rickroll = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/NeverGonnaGiveYouUp.wav"));
-                music[0] = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/RocketRace.wav"));
-                music[1] = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/Warhead.wav"));
+                music[0] = "RocketRace.wav";
+                music[1] = "Warhead.wav";
             }catch (IOException|UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
