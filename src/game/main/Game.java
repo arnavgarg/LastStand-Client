@@ -19,6 +19,8 @@ public class Game extends Canvas{
     private boolean running;
     private static StateLoader loader;
 
+    public final static String ADDRESS = "http://localhost:8080";//"http://54.201.138.236:8080/";
+
     private void start(){
         loader = new StateLoader(new MenuState());
         this.addMouseMotionListener(new MouseMotionListener() {
