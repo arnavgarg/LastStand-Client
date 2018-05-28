@@ -3,45 +3,47 @@ package game.state;
 import game.main.Game;
 import game.main.Music;
 import game.log.*;
+import game.main.Game;
 import game.map.Location;
 import game.map.Map;
+import game.sprites.Rock;
+
 import game.sprites.player.Player;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GameState extends State {
 
+    private Map map;
     private Player player;
     private Log log;
-
-    private final String address = "http://localhost:8080";//"http://54.201.138.236:8080/";//http://localhost:8080
+  
     private boolean up, left, right, down;
     private int tempCounter = 0;
 
     private boolean drawBack = true;
-
-    public GameState(String name) {
-        try {
-            player = createPlayer(name);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  
+    public GameState(Player player, ArrayList<Rock> rocks) {
+        this.player = player;
         Map.addPlayer(player);
         if(player.getName().equals("RickAstley")) {
             Music.rickRoll();
         }else {
             Music.playMusic();
         }
-        Map m = new Map();
+        Map m = new Map(rocks);
         log = new Log(player.getId());
     }
-    
+  
     public void render(Graphics g) {
         if(drawBack){
             System.out.println("here");
@@ -93,23 +95,25 @@ public class GameState extends State {
         }
         System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
 
-
-        Entry e;
         if(up){
-            e = new Entry(0, new String[0]);
-            log.addEntry(e);
+            log.addEntry(new Entry(0, new String[0]));
         }
         if(right){
-            e = new Entry(0, new String[0]);
-            log.addEntry(e);
+            log.addEntry(new Entry(0, new String[0]));
         }
         if(down){
-            e = new Entry(0, new String[0]);
-            log.addEntry(e);
+            log.addEntry(new Entry(0, new String[0]));
         }
         if(left){
-            e = new Entry(0, new String[0]);
-            log.addEntry(e);
+            log.addEntry(new Entry(0, new String[0]));
+        }
+      
+        try {
+            updateServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error Connecting to Server");
+            System.exit(0);
         }
     }
 
@@ -153,23 +157,21 @@ public class GameState extends State {
         }
     }
 
-    private Player createPlayer(String name) throws IOException {
-        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
-        con.setRequestMethod("PUT");
+    private void updateServer() throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(Game.ADDRESS).openConnection();
+        con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoInput(true);
         con.setDoOutput(true);
 
-        JSONObject json = new JSONObject();
-        json.put("name", name);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(json.toString());
+        wr.writeBytes(log.marshal().toString());
         wr.flush();
         wr.close();
 
         int responseCode = con.getResponseCode();
         if (responseCode != 200) {
-            System.out.println("[  ERROR  ] Response code of " + responseCode);
+            System.out.println("[  ERROR  ] Response code of " + responseCode + " after GET request");
             System.exit(1);
         }
 
@@ -181,8 +183,13 @@ public class GameState extends State {
         }
 
         JSONObject res = new JSONObject(response.toString());
-        return new Player(res.getInt("id"), res.getString("name"),
-                new Location(res.getDouble("x"), res.getDouble("y")));
+        JSONArray playerArr = res.getJSONArray("players");
+        ArrayList<Player> players = new ArrayList<>();
+        for (int i = 0; i < playerArr.length(); i++) {
+            JSONObject playerObj = playerArr.getJSONObject(i);
+            players.add(new Player(playerObj.getInt("id"), playerObj.getString("name"), new Location(playerObj.getDouble("x"), playerObj.getDouble("y"))));
+        }
+        map.applyUpdates(players);
     }
   
 }

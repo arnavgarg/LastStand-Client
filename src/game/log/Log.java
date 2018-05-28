@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import game.main.Game;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,36 +17,32 @@ public class Log {
     private String address = "http://54.201.138.236:8080/";
 
     public Log(int playerID) {
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<>();
         this.playerID = playerID;
     }
 
     public void addEntry(Entry e) {
         entries.add(e);
     }
-
-    public void marshal() throws IOException {
-        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
-        con.setRequestMethod("PUT");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoInput(true);
-        con.setDoOutput(true);
-
-        String player = Integer.toString(playerID);
+  
+    public JSONObject marshal() {
         JSONObject json = new JSONObject();
-        JSONArray log = new JSONArray();
-        JSONObject entry = new JSONObject();
+        json.put("player", playerID);
 
+        JSONArray logObj = new JSONArray();
         for (int i = 0; i < entries.size(); i++) {
-            entry.put("id", Integer.toString(entries.get(i).getID()));
-            entry.put("extras", entries.get(i).getExtras());
-            log.put(entry);
+            JSONObject entryObj = new JSONObject();
+            entryObj.put("id", Integer.toString(entries.get(i).getID()));
+
+            JSONArray extrasArr = new JSONArray();
+            for (String entry : entries.get(i).getExtras()) {
+                extrasArr.put(entry);
+            }
+            entryObj.put("extras", extrasArr);
+            logObj.put(entryObj);
         }
-
-        json.put("player", player);
-        json.put("log", log);
-
+        json.put("log", logObj);
+        return json;
     }
-
 
 }

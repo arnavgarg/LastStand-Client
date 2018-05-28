@@ -2,12 +2,28 @@ package game.state;
 
 import game.main.Game;
 import game.main.GameInfo;
+import game.map.Location;
+import game.sprites.Rock;
+import game.sprites.player.Player;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class ConnectState extends State{
 
@@ -78,7 +94,11 @@ public class ConnectState extends State{
             Game.loadState(new MenuState());
         }
         if(highR && name.length() != 0) {
-            Game.loadState(new GameState(name));
+            try {
+                startGame(name);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error Connecting to Game Server");
+            }
         }
     }
 
@@ -96,8 +116,47 @@ public class ConnectState extends State{
         }
     }
 
-    public void processKeyEventRelease(KeyEvent ke) {
+    public void processKeyEventRelease(KeyEvent ke) {}
 
+    private void startGame(String name) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(Game.ADDRESS).openConnection();
+        con.setRequestMethod("PUT");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setDoInput(true);
+        con.setDoOutput(true);
+
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(json.toString());
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        if (responseCode != 200) {
+            System.out.println("[  ERROR  ] Response code of " + responseCode + " after PUT request");
+            System.exit(1);
+        }
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        JSONObject res = new JSONObject(response.toString());
+        JSONObject pObj = res.getJSONObject("player");
+        Player p = new Player(pObj.getInt("id"), pObj.getString("name"), new Location(pObj.getDouble("x"), pObj.getDouble("y")));
+
+        JSONArray rArr = res.getJSONArray("rocks");
+        ArrayList<Rock> rocks = new ArrayList<>();
+        for (int i = 0; i < rArr.length(); i++) {
+            JSONObject o = rArr.getJSONObject(i);
+            rocks.add(new Rock(new Location(o.getDouble("x"), o.getDouble("y"))));
+        }
+
+        Game.loadState(new GameState(p, rocks));
     }
 
 }
