@@ -119,6 +119,7 @@ public class Game extends Canvas{
     }
 
     public static void main(String[] args){
+        System.setProperty("sun.java2d.opengl", "true");
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
