@@ -29,8 +29,6 @@ public class GameState extends State {
     private boolean up, left, right, down;
     private int tempCounter = 0;
 
-    private boolean drawBack = true;
-  
     public GameState(Player player, ArrayList<Rock> rocks) {
         this.player = player;
         map = new Map(rocks);
@@ -44,7 +42,9 @@ public class GameState extends State {
     }
   
     public void render(Graphics g) {
-        map.render(g, player.getLoc());
+        player.tick();
+        player.render(g, player.getLoc());
+//        map.render(g, player.getLoc());
         drawHUD(g);
     }
 
