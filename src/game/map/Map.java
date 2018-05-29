@@ -32,6 +32,12 @@ public class Map {
             }
         }
     }
+
+    public void renderRocks(Graphics g, Location l) {
+        for(Rock r: rocks) {
+
+        }
+    }
   
     public void addPlayer(Player p) {
         players.add(p); 

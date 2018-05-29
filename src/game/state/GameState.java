@@ -47,6 +47,7 @@ public class GameState extends State {
         player.tick();
         player.render(g, player.getLoc());
 //        map.render(g, player.getLoc());
+        map.renderRocks(g, player.getLoc());
         drawHUD(g);
     }
 
