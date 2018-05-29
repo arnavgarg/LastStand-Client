@@ -34,7 +34,9 @@ public class GameState extends State {
         map = new Map(rocks);
         map.addPlayer(player);
         if(player.getName().equals("RickAstley")) {
-            Music.rickRoll();
+            Music.playSpecial("rickroll");
+        }else if(player.getName().equals("JamesBond")){
+            Music.playSpecial("spy");
         }else {
             Music.playMusic();
         }
