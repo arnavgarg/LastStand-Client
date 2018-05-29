@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 
 public class Music {
-    private static String[] music = new String[2];
+    private static String[] music = new String[4];
     private static AudioInputStream rickroll;
     private static Clip clip;
 
@@ -52,6 +52,8 @@ public class Music {
                 rickroll = AudioSystem.getAudioInputStream(Music.class.getResource("/songs/NeverGonnaGiveYouUp.wav"));
                 music[0] = "RocketRace.wav";
                 music[1] = "Warhead.wav";
+                music[2] = "Chase.wav";
+                music[3] = "Nightfall.wav";
             }catch (IOException|UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
