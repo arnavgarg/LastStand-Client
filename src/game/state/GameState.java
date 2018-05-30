@@ -29,14 +29,14 @@ public class GameState extends State {
     private boolean up, left, right, down;
     private int tempCounter = 0;
 
-    private boolean drawBack = true;
-  
     public GameState(Player player, ArrayList<Rock> rocks) {
         this.player = player;
         map = new Map(rocks);
         map.addPlayer(player);
         if(player.getName().equals("RickAstley")) {
-            Music.rickRoll();
+            Music.playSpecial("rickroll");
+        }else if(player.getName().equals("JamesBond")){
+            Music.playSpecial("spy");
         }else {
             Music.playMusic();
         }
@@ -44,14 +44,10 @@ public class GameState extends State {
     }
   
     public void render(Graphics g) {
-        if(drawBack){
-            Color c = g.getColor();
-            g.setColor(new Color(0,100,0));
-            g.fillRect(0,0,4000, 4000);
-            g.setColor(c);
-            drawBack = false;
-        }
-        map.render(g, player.getLoc());
+        player.tick();
+        player.render(g, player.getLoc());
+//        map.render(g, player.getLoc());
+        map.renderRocks(g, player.getLoc());
         drawHUD(g);
     }
 
@@ -95,17 +91,19 @@ public class GameState extends State {
             log.addEntry(new Entry(0, new String[0]));
         }
         if(right){
-            log.addEntry(new Entry(0, new String[0]));
+            log.addEntry(new Entry(1, new String[0]));
         }
         if(down){
-            log.addEntry(new Entry(0, new String[0]));
+            log.addEntry(new Entry(2, new String[0]));
         }
         if(left){
-            log.addEntry(new Entry(0, new String[0]));
+            log.addEntry(new Entry(3, new String[0]));
         }
 
         map.tick();
-      
+
+
+        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
         try {
             updateServer();
         } catch (IOException e) {
@@ -113,10 +111,18 @@ public class GameState extends State {
             JOptionPane.showMessageDialog(null, "Error Connecting to Server");
             System.exit(0);
         }
+
+        if(!Music.isRunning()) {
+            Music.playMusic();
+        }
     }
 
     public void processMouseEvent(MouseEvent me) {
-
+        if(me.getButton() == 1) {
+            Music.shoot();
+            String[] temp = {player.getAngle() + ""};
+            log.addEntry(new Entry(4, temp));
+        }
     }
 
     public void processKeyEventPress(KeyEvent ke){
@@ -169,7 +175,7 @@ public class GameState extends State {
 
         int responseCode = con.getResponseCode();
         if (responseCode != 200) {
-            System.out.println("[  ERROR  ] Response code of " + responseCode + " after GET request");
+            System.out.println("[  ERROR  ] Response code of " + responseCode + " after attempting to get data");
             System.exit(1);
         }
 

@@ -14,7 +14,6 @@ public class Log {
 
     private ArrayList<Entry> entries;
     private int playerID;
-    private String address = "http://54.201.138.236:8080/";
 
     public Log(int playerID) {
         entries = new ArrayList<>();
@@ -27,21 +26,19 @@ public class Log {
   
     public JSONObject marshal() {
         JSONObject json = new JSONObject();
-        json.put("player", playerID);
-
         JSONArray logObj = new JSONArray();
         for (int i = 0; i < entries.size(); i++) {
             JSONObject entryObj = new JSONObject();
-            entryObj.put("id", Integer.toString(entries.get(i).getID()));
-
             JSONArray extrasArr = new JSONArray();
             for (String entry : entries.get(i).getExtras()) {
                 extrasArr.put(entry);
             }
             entryObj.put("extras", extrasArr);
+            entryObj.put("id", entries.get(i).getID());
             logObj.put(entryObj);
         }
         json.put("log", logObj);
+        json.put("player", playerID);
         return json;
     }
 

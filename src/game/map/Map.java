@@ -22,16 +22,6 @@ public class Map {
         }
     }
 
-    public void render(Graphics g, Location loc, int id) {
-        for(Player p : players) {
-            if(p.getId() == id) {
-                p.render(g, loc);
-            }else if(p.getLoc().diffX(loc) <= 400 && p.getLoc().diffY(loc) <= 300) {
-                p.render(g, loc);
-            }
-        }
-    }
-
     public void applyUpdates(ArrayList<Player> playersUpdated) {
         for (Player player : playersUpdated) {
             int i = players.indexOf(player);
@@ -40,6 +30,12 @@ public class Map {
             } else {
                 players.add(player);
             }
+        }
+    }
+
+    public void renderRocks(Graphics g, Location l) {
+        for(Rock r: rocks) {
+            r.render(g, l);
         }
     }
   

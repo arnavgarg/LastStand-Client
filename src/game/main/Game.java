@@ -19,7 +19,7 @@ public class Game extends Canvas{
     private boolean running;
     private static StateLoader loader;
 
-    public final static String ADDRESS = "http://54.201.138.236:8080/";
+    public final static String ADDRESS = "http://localhost:8080";//"http://54.201.138.236:8080/";
 
     private void start(){
         loader = new StateLoader(new MenuState());
@@ -119,9 +119,11 @@ public class Game extends Canvas{
     }
 
     public static void main(String[] args){
+        System.setProperty("sun.java2d.opengl", "true");
         JFrame frame = new JFrame("Last Stand");
         Game game = new Game();
         game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        game.setBackground(new Color(117, 214, 57));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
