@@ -46,9 +46,6 @@ public class Map {
     public ArrayList<Player> getPlayers() {
         return players;
     }
-    public ArrayList<Rock> getRocks() {
-        return rocks;
-    }
 
     public void render(Graphics g, Location loc) {
         for(Player p : players) {
