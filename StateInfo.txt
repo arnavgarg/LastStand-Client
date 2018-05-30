@@ -1,8 +1,0 @@
-Player locations
-Map
-Inventory
-   equipped
-   inventory
-Mouse location
-Temp entities (bullets)
-
