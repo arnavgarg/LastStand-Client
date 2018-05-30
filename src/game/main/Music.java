@@ -26,7 +26,7 @@ public class Music {
         try {
             clip = AudioSystem.getClip();
             switch (s){
-                case "rick":
+                case "rickroll":
                     clip.open(rickroll);
                     break;
                 case "spy":

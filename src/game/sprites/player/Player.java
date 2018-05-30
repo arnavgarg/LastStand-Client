@@ -60,6 +60,9 @@ public class Player {
     }
 
     public void render(Graphics g, Location l) {
+        if(Math.abs(l.diffX(this.loc)) > 400 || Math.abs(l.diffY(this.loc)) > 300) {
+            return;
+        }
         g.drawImage(image, Game.WIDTH/2 - 25 - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - 25 - (int) (l.diffY(this.loc)), 50, 50, null);
         drawGun(g, l);
         g.setColor(Color.BLACK);

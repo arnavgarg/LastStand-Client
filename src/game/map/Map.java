@@ -35,7 +35,7 @@ public class Map {
 
     public void renderRocks(Graphics g, Location l) {
         for(Rock r: rocks) {
-
+            r.render(g, l);
         }
     }
   

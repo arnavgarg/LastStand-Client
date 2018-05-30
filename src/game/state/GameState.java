@@ -101,7 +101,9 @@ public class GameState extends State {
         }
 
         map.tick();
-      
+
+
+        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
         try {
             updateServer();
         } catch (IOException e) {
