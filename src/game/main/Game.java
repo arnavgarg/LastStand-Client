@@ -9,6 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,7 +25,40 @@ public class Game extends Canvas{
     private boolean running;
     private static StateLoader loader;
 
-    public final static String ADDRESS = "http://localhost:8080";//"http://54.201.138.236:8080/";
+    public static String ADDRESS = "";//"http://54.201.138.236:8080/";
+    private BufferedReader f;
+    private JOptionPane fileError, URLerror;
+    private String line;
+    private URL url;
+    
+    public Game(){
+    	try {
+			f = new BufferedReader(new FileReader("config.txt"));
+			line = f.readLine();
+		} catch (FileNotFoundException e) {
+			fileError = new JOptionPane();
+			fileError.showMessageDialog(null, "CONFIG FILE NOT FOUND");
+			line = "http:localhost:8080";
+		} catch (IOException e) {
+			URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
+			line = "http:localhost:8080";
+		} catch (NullPointerException e){
+			URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
+			line = "http:localhost:8080";
+		}  	
+    	try {
+			url = new URL(line);
+		} catch (MalformedURLException e) {
+			URLerror = new JOptionPane();
+			URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
+			line = "http:localhost:8080";
+		}
+    	
+    	if(line.length() != -1){
+    		ADDRESS = line;
+    	}
+    	
+    }
 
     private void start(){
         loader = new StateLoader(new MenuState());
