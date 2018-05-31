@@ -5,6 +5,7 @@ import game.main.Music;
 import game.log.*;
 import game.map.Location;
 import game.map.Map;
+import game.map.MiniMap;
 import game.sprites.Rock;
 
 import game.sprites.player.Player;
@@ -25,6 +26,7 @@ public class GameState extends State {
     private Map map;
     private Player player;
     private Log log;
+    private MiniMap mm;
   
     private boolean up, left, right, down;
     private int tempCounter = 0;
@@ -33,6 +35,7 @@ public class GameState extends State {
         this.player = player;
         map = new Map(rocks);
         map.addPlayer(player);
+        mm = new MiniMap(player, map);
         if(player.getName().equals("RickAstley")) {
             Music.playSpecial("rickroll");
         }else if(player.getName().equals("JamesBond")){
@@ -49,6 +52,7 @@ public class GameState extends State {
 //        map.render(g, player.getLoc());
         map.renderRocks(g, player.getLoc());
         drawHUD(g);
+        mm.render(g, new Location(Game.WIDTH - 140, 20));
     }
 
     private void drawHUD(Graphics g){
@@ -69,24 +73,6 @@ public class GameState extends State {
     }
 
     public void tick(){
-        //temporary local movement
-        tempCounter++;
-        if(tempCounter/7 >=1) {
-            if (left) {
-                player.getLoc().setX(player.getLoc().getX()-10);
-            }
-            if (right) {
-                player.getLoc().setX(player.getLoc().getX()+10);
-            }
-            if (up) {
-                player.getLoc().setY(player.getLoc().getY()-10);
-            }
-            if (down) {
-                player.getLoc().setY(player.getLoc().getY()+10);
-            }
-            tempCounter%=7;
-        }
-
         if(up){
             log.addEntry(new Entry(0, new String[0]));
         }
