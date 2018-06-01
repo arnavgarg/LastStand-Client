@@ -26,6 +26,8 @@ public class Log {
   
     public JSONObject marshal() {
         JSONObject json = new JSONObject();
+        json.put("player", playerID);
+
         JSONArray logObj = new JSONArray();
         for (int i = 0; i < entries.size(); i++) {
             JSONObject entryObj = new JSONObject();
@@ -38,8 +40,11 @@ public class Log {
             logObj.put(entryObj);
         }
         json.put("log", logObj);
-        json.put("player", playerID);
         return json;
+    }
+
+    public void clear() {
+        entries = new ArrayList<>();
     }
 
 }
