@@ -8,7 +8,7 @@ import game.map.Map;
 import game.map.MiniMap;
 import game.sprites.Rock;
 
-import game.sprites.player.Player;
+import game.sprites.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,7 +33,7 @@ public class GameState extends State {
 
     public GameState(Player player, ArrayList<Rock> rocks) {
         this.player = player;
-        map = new Map(rocks);
+        map = new Map(player, rocks);
         map.addPlayer(player);
         mm = new MiniMap(player, map);
         if(player.getName().equals("RickAstley")) {
@@ -47,10 +47,8 @@ public class GameState extends State {
     }
   
     public void render(Graphics g) {
-        player.tick();
         player.render(g, player.getLoc());
-//        map.render(g, player.getLoc());
-        map.renderRocks(g, player.getLoc());
+        map.render(g, player.getLoc());
         drawHUD(g);
         mm.render(g, new Location(Game.WIDTH - 140, 20));
     }
@@ -87,16 +85,16 @@ public class GameState extends State {
         }
 
         map.tick();
+        player.tick();
 
-
-        System.out.println(player.getLoc().getX() + " " + player.getLoc().getY());
         try {
             updateServer();
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error Connecting to Server");
+            JOptionPane.showMessageDialog(null, "Error Communicating with Server");
             System.exit(0);
         }
+        log.clear();
 
         if(!Music.isRunning()) {
             Music.playMusic();
