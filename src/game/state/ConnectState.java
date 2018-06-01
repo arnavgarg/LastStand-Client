@@ -124,7 +124,7 @@ public class ConnectState extends State{
 
     public void processKeyEventRelease(KeyEvent ke) {}
 
-    private void startGame(String name) throws IOException {
+    public void startGame(String name) throws IOException {
         HttpURLConnection con = (HttpURLConnection) new URL(Game.ADDRESS).openConnection();
         con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json");
