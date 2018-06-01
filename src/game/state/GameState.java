@@ -191,6 +191,7 @@ public class GameState extends State {
 
         if(deathButton == JOptionPane.YES_OPTION) {
             ConnectState restart = new ConnectState();
+            Music.stop();
             restart.startGame(player.getName());
         } else {
             System.exit(0);

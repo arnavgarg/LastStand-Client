@@ -16,6 +16,9 @@ public class Music {
 
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(Music.class.getResource("/songs/" + music[i])));
+            FloatControl gainControl =
+                    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-10.0f);
             clip.start();
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
@@ -37,6 +40,11 @@ public class Music {
         }catch (LineUnavailableException|IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void stop() {
+        clip.stop();
+        clip = null;
     }
 
     public static void shoot() {
