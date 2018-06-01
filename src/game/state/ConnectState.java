@@ -4,7 +4,7 @@ import game.main.Game;
 import game.main.GameInfo;
 import game.map.Location;
 import game.sprites.Rock;
-import game.sprites.player.Player;
+import game.sprites.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
