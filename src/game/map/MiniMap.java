@@ -26,5 +26,14 @@ public class MiniMap {
 
         g.setColor(Color.BLACK);
         rocks = map.getRocks();
+        for(Rock r:rocks) {
+            if(Math.abs(r.getLoc().diffX(player.getLoc())) > 720 || Math.abs(r.getLoc().diffY(player.getLoc())) > 540) {
+                return;
+            }
+            g.fillRect((int) loc.getX() + 60 - 1 - (int) r.getLoc().diffX(player.getLoc()),
+                    (int) loc.getY() + 45 - 1 - (int) r.getLoc().diffY(player.getLoc()), 2, 2);
+        }
+
+
     }
 }
