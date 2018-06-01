@@ -1,7 +1,7 @@
 package game.map;
 
 import game.sprites.Rock;
-import game.sprites.player.Player;
+import game.sprites.Player;
 
 import java.awt.*;
 import java.util.ArrayList;

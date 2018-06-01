@@ -1,9 +1,8 @@
-package game.sprites.player;
+package game.sprites;
 
 import game.main.Game;
 import game.main.GameInfo;
 import game.map.Location;
-import game.sprites.inventory.Item;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +14,6 @@ public class Player {
     private int id;
     private String name;
     private Location loc;
-    private Item[] inventory = new Item[5];
 
     private double angle;
     private int health; //0-100
@@ -70,6 +68,11 @@ public class Player {
         g.drawString(name, Game.WIDTH/2 - (3*name.length()) - (int) (l.diffX(this.loc)), Game.HEIGHT/2 - 27 - (int) (l.diffY(this.loc)));
     }
 
+    public void set(Player p) {
+        this.loc = p.loc;
+        this.health = p.health;
+    }
+
     public Location getLoc() {
         return loc;
     }
@@ -89,6 +92,7 @@ public class Player {
     public String getName() {
         return name;
     }
+
 
     @Override
     public boolean equals(Object o) {
