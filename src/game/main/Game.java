@@ -33,26 +33,24 @@ public class Game extends Canvas{
     
     public Game(){
     	try {
-		f = new BufferedReader(new FileReader("config.txt"));
-		line = f.readLine();
-	} catch (FileNotFoundException e) {
-		fileError = new JOptionPane();
-		fileError.showMessageDialog(null, "CONFIG FILE NOT FOUND");
-		line = "http://54.201.138.236:8080/";
-	} catch (IOException e) {
-		URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
-		line = "http://54.201.138.236:8080/";
-	} catch (NullPointerException e){
-		URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
-		line = "http://54.201.138.236:8080/";
-	}  	
-    	try {
-		url = new URL(line);
-	} catch (MalformedURLException e) {
-		URLerror = new JOptionPane();
-		URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
-		line = "http://54.201.138.236:8080/";
-	}
+            f = new BufferedReader(new FileReader("config.txt"));
+            line = f.readLine();
+        } catch (FileNotFoundException e) {
+            fileError = new JOptionPane();
+            line = "http://54.201.138.236:8080/";
+        } catch (IOException e) {
+            line = "http://54.201.138.236:8080/";
+        } catch (NullPointerException e){
+            URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
+            line = "http://54.201.138.236:8080/";
+        }
+        try {
+            url = new URL(line);
+        } catch (MalformedURLException e) {
+            URLerror = new JOptionPane();
+            URLerror.showMessageDialog(null, "INVALID ADDRESS FOUND IN CONIFG");
+            line = "http://54.201.138.236:8080/";
+        }
 	    
     	if(line.length() != -1){
     		ADDRESS = line;

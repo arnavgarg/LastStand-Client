@@ -34,4 +34,8 @@ public class Location {
         return this.y - loc.getY();
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }
