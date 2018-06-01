@@ -14,6 +14,7 @@ public class Player {
     private int id;
     private String name;
     private Location loc;
+    private int status;
 
     private double angle;
     private int health; //0-100
@@ -43,6 +44,32 @@ public class Player {
         this.loc = loc;
         this.angle = 1.57;
         this.health = 100;
+        this.status = 1;
+    }
+
+    public Player(int id, String name, Location loc, double angle, int health, int status) {
+        if (image == null) {
+            try {
+                image = ImageIO.read(getClass().getResource("/circle.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (gun == null) {
+            try {
+                gun = ImageIO.read(getClass().getResource("/ClipGun.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        this.id = id;
+        this.name = name;
+        this.loc = loc;
+        this.angle = angle;
+        this.health = health;
+        this.status = status;
     }
 
     public void tick() {
