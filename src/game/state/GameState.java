@@ -86,7 +86,8 @@ public class GameState extends State {
 
         map.tick();
         player.tick();
-
+        
+        log.addEntry(new Entry(5, new String[] {player.getAngle() + ""}));
         try {
             updateServer();
         } catch (IOException e) {
