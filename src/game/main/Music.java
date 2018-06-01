@@ -66,4 +66,8 @@ public class Music {
                 e.printStackTrace();
             }
     }
+
+    public static void turnOff() {
+        clip.stop();
+    }
 }

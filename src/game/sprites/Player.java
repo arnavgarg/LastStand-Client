@@ -98,6 +98,7 @@ public class Player {
     public void set(Player p) {
         this.loc = p.loc;
         this.health = p.health;
+        this.status = p.status;
     }
 
     public Location getLoc() {
@@ -120,6 +121,9 @@ public class Player {
         return name;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
     @Override
     public boolean equals(Object o) {
