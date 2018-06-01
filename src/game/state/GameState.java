@@ -33,7 +33,7 @@ public class GameState extends State {
 
     public GameState(Player player, ArrayList<Rock> rocks) {
         this.player = player;
-        map = new Map(player, rocks);
+        map = new Map(player, rocks, this);
         map.addPlayer(player);
         mm = new MiniMap(player, map);
         if(player.getName().equals("RickAstley")) {
@@ -176,23 +176,25 @@ public class GameState extends State {
         for (int i = 0; i < playerArr.length(); i++) {
             JSONObject playerObj = playerArr.getJSONObject(i);
             players.add(new Player(playerObj.getInt("id"), playerObj.getString("name"), new Location(playerObj.getDouble("x"), playerObj.getDouble("y")), playerObj.getDouble("angle"), playerObj.getInt("health"), playerObj.getInt("status")));
-            if (playerObj.getInt("status") == 0) {
-                death();
-            }
-
         }
 
         map.applyUpdates(players);
     }
 
-    public void death() throws IOException {
+    public void death() {
         int deathButton = JOptionPane.YES_NO_OPTION;
         deathButton = JOptionPane.showConfirmDialog (null, "Keep playing?","YOU DIED", deathButton);
 
         if(deathButton == JOptionPane.YES_OPTION) {
+            Music.turnOff();
             ConnectState restart = new ConnectState();
-            Music.stop();
-            restart.startGame(player.getName());
+            try {
+                restart.startGame(player.getName());
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "ERROR CONNECTING TO SERVER");
+                System.exit(0);
+            }
         } else {
             System.exit(0);
         }
