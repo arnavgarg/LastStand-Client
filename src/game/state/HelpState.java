@@ -43,6 +43,10 @@ public class HelpState extends State{
 
         g.drawImage(helpScreen, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 
+        g.fillRect(203, 200, 120, 75);
+        g.fillRect(275, 300, 75, 75);
+        g.fillRect(675, 275, 100, 50);
+
         //Draw arrow labels
         g.setFont(new Font("Silon", Font.PLAIN, 12));
         g.setColor(Color.BLACK);
