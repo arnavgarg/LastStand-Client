@@ -63,6 +63,7 @@ public class Map {
     public void render(Graphics g, Location loc) {
         for(Player p : players) {
             if (p.getStatus() != 0) {
+                System.out.println(p.getAngle());
                 p.render(g, loc);
             }
         }

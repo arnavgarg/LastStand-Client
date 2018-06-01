@@ -44,6 +44,7 @@ public class MiniMap {
         g.setColor(Color.RED);
         players = map.getPlayers();
         for(Player p:players) {
+            if(p.getStatus()==0) continue;
             if(Math.abs(p.getLoc().diffX(player.getLoc())) > 720 || Math.abs(p.getLoc().diffY(player.getLoc())) > 540) {
                 continue;
             }
