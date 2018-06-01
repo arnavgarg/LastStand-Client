@@ -18,7 +18,7 @@ public class Music {
             clip.open(AudioSystem.getAudioInputStream(Music.class.getResource("/songs/" + music[i])));
             FloatControl gainControl =
                     (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-10.0f);
+            gainControl.setValue(-15.0f);
             clip.start();
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
@@ -51,6 +51,9 @@ public class Music {
         try {
             Clip c = AudioSystem.getClip();
             c.open(AudioSystem.getAudioInputStream(Music.class.getResource("/songs/shot.wav")));
+            FloatControl gainControl =
+                    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-30.0f); // Reduce volume by 10 decibels.
             c.start();
         }catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             e.printStackTrace();
