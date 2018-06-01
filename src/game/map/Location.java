@@ -34,6 +34,10 @@ public class Location {
         return this.y - loc.getY();
     }
 
+    public Location shiftLoc(double dx, double dy) {
+        return new Location(this.x + dx, this.y + dy);
+    }
+
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";

@@ -15,6 +15,7 @@ public class Map {
     public Map(Player p, ArrayList<Rock> rocks) {
         this.mainPlayer = p;
         this.rocks = rocks;
+        players.add(new Player(10, "TESTING", new Location(1000, 1000)));
     }
 
     public void tick() {
@@ -51,6 +52,8 @@ public class Map {
     public ArrayList<Rock> getRocks() {
         return rocks;
     }
+
+    public ArrayList<Player> getPlayers() {return players;}
 
     public void render(Graphics g, Location loc) {
         for(Player p : players) {
